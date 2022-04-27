@@ -14,6 +14,7 @@
 import RecipeList from "./components/RecipeList.vue";
 import RecipeForm from "./components/RecipeForm.vue";
 import SearchBar from "./components/SearchBar.vue";
+import axios from "axios";
 import { defineComponent } from "vue";
 
 export default defineComponent({
@@ -24,7 +25,7 @@ export default defineComponent({
     SearchBar,
   },
   data: () => ({
-    recipeList: [
+    /*recipeList: [
       {
         id: 1,
         servings: 4,
@@ -94,17 +95,30 @@ export default defineComponent({
         directions: ["Wash Fish", "Wash Crab", "Cut Onion"],
         featured: '',
       },
-    ],
+    ],*/
+    recipeList: null,
     showModal: false,
     searchTerm:'',
     filterData: [],  
   }),
+  mounted() {
+    axios
+      .get("http://localhost:3000/recipes")
+      .then((recipe) => {
+        this.recipeList = recipe.data;
+        console.log(this.recipeList);
+      })
+      .catch((error) => {
+        console.log("There was an error: " + error);
+      });
+  },
   computed: {
   /* Funció que:
       ○ Retorna el llistat de receptes en el cas que searchTerm estigui buit.
       ○ Retorna la col·lecció de receptes filtrada pels termes de cerca. Heu de buscar si
         searchTerms forma part del nom de la recepta o dels ingredients a cada recepta. */
     recipeListFiltered() {
+
       let listaFiltrada = [];
       
       if(this.searchTerm != ''){
