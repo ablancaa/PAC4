@@ -116,8 +116,7 @@ export default defineComponent({
         listaFiltrada = this.recipeList;
       }
       return listaFiltrada;
-    },
-    
+    }, 
   },     
   methods: {
   /* Afegeix un objecte de tipus Recipe a l'array d'elements recipeList. */
