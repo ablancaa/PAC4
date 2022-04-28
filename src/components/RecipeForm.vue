@@ -63,6 +63,7 @@
 <script>
 import { defineComponent } from "vue";
 import { uuid } from 'vue-uuid';
+import axios from "axios";
 export default defineComponent({
   name: "RecipeForm",
    data() {
@@ -94,7 +95,7 @@ export default defineComponent({
                     d'ingredients i directions..
                   ○ Emetre un esdeveniment add-recipe amb l'objecte creat.
                   ○ Esborrar els camps del formulari.  */
-           createRecipe() {
+           async createRecipe() {
                 var error = document.getElementById("errores");
                 var add = document.getElementById("add");
                 
@@ -147,6 +148,16 @@ export default defineComponent({
                         directions: directionsUnaAuno,
                         featured: this.featured,
                     };
+                     try {
+                      axios
+                      .post("http://localhost:3000/recipe", recipe)
+                      .then((res) => {
+                        this.recipeList = res.data.recipes;
+                        console.log(this.recipeList);
+                      })
+                    } catch (error) {
+                      console.log(error);
+                    }
 
                 //Emite la receta nueva a App
                    this.$emit('nuevaReceta', recipe);
