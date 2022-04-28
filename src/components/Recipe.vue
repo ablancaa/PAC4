@@ -43,7 +43,7 @@
 
 <script>
 import { defineComponent } from "vue";
-
+import axios from "axios";
 export default defineComponent({
   name: "RecipeCard",
   props: {
@@ -57,8 +57,22 @@ export default defineComponent({
       Haureu d'emetre els esdeveniments següents: 
         ○ delete-recipe(id): Esdeveniment encarregat d'informar que s'ha eliminat 
           una recepta. Indica l'identificador id de la recepta com a paràmetre.*/
-    deleteRecipe () {
-      this.$emit("deleteRecipe", this.recipe.id);
+    async deleteRecipe () {
+      try {
+        let response = await axios.delete("http://localhost:3000/recipe/",
+          { data: {id: this.recipe.id} 
+          });      
+        console.log("Response: "+response); 
+        this.recipeList = response.data.recipe;
+        this.$emit("deleteRecipe", this.recipe.id);
+        
+      } 
+      catch (error){
+        console.log(error);
+        console.log("No funciona el borrado");
+      }
+      console.log(this.result);
+      
       console.log("Desde Recipe: "+this.recipe.id);
     } 
   },//FIN METHODS
