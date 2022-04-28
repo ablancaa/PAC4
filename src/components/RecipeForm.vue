@@ -62,7 +62,7 @@
 
 <script>
 import { defineComponent } from "vue";
-import { uuid } from 'vue-uuid'; 
+import { uuid } from 'vue-uuid';
 export default defineComponent({
   name: "RecipeForm",
    data() {
@@ -81,6 +81,7 @@ export default defineComponent({
                 recipe:{},
             }
         },
+        created(){},
         mounted(){},
         methods: {
             /*  Aquest mètode ha d'executar-se quan es faci el submit del formulari, és a
@@ -93,7 +94,7 @@ export default defineComponent({
                     d'ingredients i directions..
                   ○ Emetre un esdeveniment add-recipe amb l'objecte creat.
                   ○ Esborrar els camps del formulari.  */
-            createRecipe() {
+           createRecipe() {
                 var error = document.getElementById("errores");
                 var add = document.getElementById("add");
                 
@@ -148,7 +149,7 @@ export default defineComponent({
                     };
 
                 //Emite la receta nueva a App
-                    this.$emit('nuevaReceta', recipe);
+                   this.$emit('nuevaReceta', recipe);
 
                 //Muestra datos de receta por consola
                     console.log("Emitida nueva receta: "+recipe);
