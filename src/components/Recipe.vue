@@ -59,9 +59,7 @@ export default defineComponent({
           una recepta. Indica l'identificador id de la recepta com a paràmetre.*/
     async deleteRecipe () {
       try {
-        let response = await axios.delete("http://localhost:3000/recipe/",
-          { data: {id: this.recipe.id} 
-          });      
+        let response = await axios.delete("http://localhost:3000/recipe/",{ data: {id: this.recipe.id}});      
         console.log("Response: "+response); 
         this.recipeList = response.data.recipe;
         this.$emit("deleteRecipe", this.recipe.id);
