@@ -95,32 +95,8 @@ export default defineComponent({
 
   /*Elimina l'objecte de la llista recipeList l'identificador id és el
   passat per paràmetre.*/
-    async deleteRecipe(recipeId){
+   deleteRecipe(recipeId){
     
-     /* try{
-        let response = await axios.delete("http://localhost:3000/recipe/",{ data: {id: recipeId} });       
-        this.recipeList = response.data.recipe;
-        console.log("Response: "+response);
-      } 
-      catch (error){
-        console.log(error);
-        console.log("No funciona el borrado");
-      }
-      console.log(this.result);*/
-     /* try {
-        axios
-          .delete('http://localhost:3000/recipe/'+ recipeId)
-          .then((res) => {
-            this.recipeList = res.data.recipe;
-            //let busqueda = recipeId;
-            //let indice = this.recipeList.findIndex(receta => receta.id === busqueda);
-            //this.recipeList.splice(indice, 1);
-          })
-          console.log("Response_ ");
-      } catch (error) {
-          console.log(error);
-      }*/
-      
       let busqueda = recipeId;
       console.log("Tenemos el array de recetas: ", this.recipeList);
       console.log("Buscando en donde el ID de la receta sea igual a: ", busqueda);
