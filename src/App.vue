@@ -82,8 +82,18 @@ export default defineComponent({
          
     },*/
   /* Afegeix un objecte de tipus Recipe a l'array d'elements recipeList. */
-    addRecipe(recipe){
-      this.recipeList.push(recipe);
+   async addRecipe(recipe){
+      try {
+          axios
+          .post("http://localhost:3000/recipe", recipe)
+          .then((res) => {
+            this.recipeList = res.data.recipes;
+            console.log(this.recipeList);
+          })
+      } catch (error) {
+            console.log(error);
+          }
+      //this.recipeList.push(recipe);
       console.log("receta añadida: "+recipe);
     },
 
