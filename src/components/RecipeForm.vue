@@ -156,16 +156,6 @@ export default defineComponent({
                         console.log(error);
                         console.log("No funciona el borrado");
                       }
-                    /* try {
-                      axios
-                        .post("http://localhost:3000/recipe", recipe)
-                        .then((res) => {
-                          this.recipeList = res.data.recipes;
-                          console.log(this.recipeList);
-                        })
-                      } catch (error) {
-                      console.log(error);
-                      }*/
 
                 //Emite la receta nueva a App
                    this.$emit('nuevaReceta', recipe);
