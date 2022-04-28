@@ -67,18 +67,6 @@ export default defineComponent({
     
   },     
   methods: {
-    /*getRecetas(){
-      axios
-         .get("http://localhost:3000/recipes")
-         .then((res) => {
-           this.recipeList = res.data.recipes;
-           console.log(this.recipeList);
-         })
-         .catch((error) => {
-           console.log(error);
-         });
-         
-    },*/
   /* Afegeix un objecte de tipus Recipe a l'array d'elements recipeList. */
    addRecipe(recipe){
       this.recipeList.push(recipe);
