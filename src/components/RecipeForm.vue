@@ -148,7 +148,15 @@ export default defineComponent({
                         directions: directionsUnaAuno,
                         featured: this.featured,
                     };
-                     try {
+                      try {
+                        let response = await axios.post("http://localhost:3000/recipe/", recipe);
+                        console.log("Response: "+response); 
+                        //this.recipeList = response.data.recipe;
+                      } catch (error){
+                        console.log(error);
+                        console.log("No funciona el borrado");
+                      }
+                    /* try {
                       axios
                         .post("http://localhost:3000/recipe", recipe)
                         .then((res) => {
@@ -157,7 +165,7 @@ export default defineComponent({
                         })
                       } catch (error) {
                       console.log(error);
-                      }
+                      }*/
 
                 //Emite la receta nueva a App
                    this.$emit('nuevaReceta', recipe);
