@@ -6,7 +6,7 @@
     </div>
     <search-bar @openForm="toggleForm" @newVal="setSearchTerm" @clearSearch="setSearchTerm"/>
     <recipe-list :recipeList="recipeListFiltered" @deleteRecipe="deleteRecipe"/>
-    <recipe-form v-if="showModal" @closeForm="toggleForm"  @nuevaReceta="addRecipe"/>
+    <recipe-form v-if="showModal" @closeForm="toggleForm"  @nuevaReceta="addRecipe" @cerrarForm="toggleForm"/>
     
   </div>
 </template>
@@ -33,7 +33,9 @@ export default defineComponent({
     filterData: [],  
   }),
   setup(){},
+  
   async created(){ 
+    //Carga el listado de recetas del servidor
     try {
     let response = await axios.get('http://localhost:3000/recipes/');
     this.recipeList= response.data.recipes;
@@ -41,16 +43,6 @@ export default defineComponent({
     } catch (error){
       console.log(error);
     }
-    /*axios
-    .get("http://localhost:3000/recipes")
-    .then((recipe) => {
-      this.recipeList = recipe.data.recipes;
-      console.log(this.recipeList);
-    })
-    } catch (error) {
-      console.log(error);
-    }*/
-    
   },
   computed: {
     

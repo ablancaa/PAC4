@@ -162,6 +162,9 @@ export default defineComponent({
                 //Emite la receta nueva a App
                    this.$emit('nuevaReceta', recipe);
 
+                //Cierra la ventana modal
+                   //this.$emit('cerrarForm', this.showModal=false);
+  
                 //Muestra datos de receta por consola
                     console.log("Emitida nueva receta: "+recipe);
 
