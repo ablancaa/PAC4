@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 import axios from "axios";
 export default defineComponent({
   name: "RecipeCard",
@@ -52,7 +52,12 @@ export default defineComponent({
       required: true,
     },
   },
-  setup(){},
+  setup(props){
+    let recipe = ref([]);
+    console.log(props.recipe, recipe.value);
+    return  recipe;
+   
+  },
   methods: {
     /* Aquest mètode s'ha d'executar cada vegada que es fes clic al botó amb la X. 
       Haureu d'emetre els esdeveniments següents: 
@@ -60,7 +65,7 @@ export default defineComponent({
           una recepta. Indica l'identificador id de la recepta com a paràmetre.*/
     async deleteRecipe () {
       try {
-        let response = await axios.delete("http://localhost:3000/recipe/",{ data: {id: this.recipe.id}});      
+        let response = await axios.delete("http://localhost:3000/recipe/",{ data: { id: this.recipe.id } });      
         console.log("Response: "+response); 
         this.recipeList = response.data.recipe;
         this.$emit("deleteRecipe", this.recipe.id);
