@@ -1,5 +1,6 @@
 <template>
   <div class="search">
+    <p>Consulta: {{ consulta }}</p>
     <div>
     <form @submit.prevent="busqueda"> 
        <input type="text" id="consulta" v-model="consulta" @keyup="search" placeholder="Search for a recipe" />
@@ -7,21 +8,32 @@
     </form>
     </div>
     <button @click="showForm">Add a new recipe</button>
+    <div>
+    </div>
   </div>
 </template>
 <script>
 
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 export default defineComponent({
   name: "SearchBar",
    components: {},
   data() {
     return {
-      consulta: '',
+      //consulta: '',
 
     }
   },
-  setup(){},
+  setup(){
+    let consulta = ref('');
+    console.log("Setup en SearchBar variable consulta: "+consulta.value)
+    
+    setTimeout(()=> {
+      //user.value='Oscar Blanca';
+    },3000)
+
+    return { consulta };
+  },
   computed: {},
   methods: {
     /* Aquest mètode s'encarregarà d'emetre un esdeveniment show-form. S’haurà
