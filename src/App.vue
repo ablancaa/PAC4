@@ -7,6 +7,7 @@
     <search-bar @openForm="toggleForm" @newVal="setSearchTerm" @clearSearch="setSearchTerm"/>
     <recipe-list :recipeList="recipeListFiltered" @deleteRecipe="deleteRecipe"/>
     <recipe-form v-if="showModal" @closeForm="toggleForm"  @nuevaReceta="addRecipe"/>
+    
   </div>
 </template>
 
@@ -15,6 +16,7 @@ import RecipeList from "./components/RecipeList.vue";
 import RecipeForm from "./components/RecipeForm.vue";
 import SearchBar from "./components/SearchBar.vue";
 import axios from "axios";
+//import CompositionApi from '@vue/composition-api';
 import { defineComponent } from "vue";
 
 export default defineComponent({
@@ -25,94 +27,27 @@ export default defineComponent({
     SearchBar,
   },
   data: () => ({
-    /*recipeList: [
-      {
-        id: 1,
-        servings: 4,
-        time: "30m",
-        difficulty: "Easy",
-        title: "Spaghetti",
-        ingredients: ["noodles", "tomato sauce", "cheese", "oregano"],
-        directions: ["boil noodles", "cook noodles", "eat noodles"],
-        imageUrl:
-          "https://imagesvc.meredithcorp.io/v3/mm/image?q=60&c=sc&poi=face&w=2000&h=1000&url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F21%2F2018%2F02%2F14%2Frecetas-4115-spaghetti-boloesa-facil-2000.jpg",
-        featured: '',
-      },
-      {
-        id: 2,
-        servings: 2,
-        time: "15m",
-        difficulty: "Medium",
-        title: "Pizza",
-        ingredients: ["dough", "tomato sauce", "cheese", "pimiento"],
-        directions: ["boil dough", "cook dough", "eat pizza"],
-        imageUrl:
-          "https://www.saborusa.com/wp-content/uploads/2019/10/Animate-a-disfrutar-una-deliciosa-pizza-de-salchicha-Foto-destacada.png",
-        featured: true,
-      },
-      {
-        id: 3,
-        servings: 6,
-        time: "1h",
-        difficulty: "Hard",
-        title: "Salad",
-        ingredients: ["lettuce", "tomato", "cheese"],
-        directions: ["cut lettuce", "cut tomato", "cut cheese"],
-        imageUrl:
-          "https://www.unileverfoodsolutions.es/dam/global-ufs/mcos/SPAIN/calcmenu/recipes/ES-recipes/In-Development/american-bbq-beef-salad/main-header.jpg",
-        featured: '',
-      },
-      {
-        id: 4,
-        title: "Zarzuela",
-        imageUrl: "https://www.deliciosi.com/images/1900/1982/zarzuela.jpg",
-        servings: 4,
-        time: "3,2h",
-        difficulty: "Hard",
-        ingredients: ["fish", "crab", "onion", "potatos", "oil"],
-        directions: ["Wash Fish", "Wash Crab", "Cut Onion"],
-        featured: true,
-      },
-      {
-        id: 5,
-        title: "Steak Tartar",
-        imageUrl: "https://placergastronomico.es/wp-content/uploads/2019/03/Portada-Ps.jpg",
-        servings: 4,
-        time: "30 min",
-        difficulty: "Easy",
-        ingredients: ["carne", "crab", "onion", "potatos", "oil"],
-        directions: ["Wash Fish", "Wash Crab", "Cut Onion"],
-        featured: true,
-      },
-      {
-        id: 6,
-        title: "Tortellini",
-        imageUrl: "https://images-gmi-pmc.edge-generalmills.com/e5230c9a-20c6-484a-ae4d-b32eb7be0ef0.jpg",
-        servings: 4,
-        time: "30 min",
-        difficulty: "Easy",
-        ingredients: ["fish", "crab", "onion", "potatos", "oil"],
-        directions: ["Wash Fish", "Wash Crab", "Cut Onion"],
-        featured: '',
-      },
-    ],*/
-    recipeList: null,
+    recipeList: [],
     showModal: false,
     searchTerm:'',
     filterData: [],  
   }),
-  mounted() {
+  setup(){},
+  async created(){
+    try {
     axios
-      .get("http://localhost:3000/recipes")
-      .then((recipe) => {
-        this.recipeList = recipe.data;
-        console.log(this.recipeList);
-      })
-      .catch((error) => {
-        console.log("There was an error: " + error);
-      });
+    .get("http://localhost:3000/recipes")
+    .then((recipe) => {
+      this.recipeList = recipe.data.recipes;
+      console.log(this.recipeList);
+    })
+    } catch (error) {
+      console.log(error);
+    }
+    
   },
   computed: {
+    
   /* Funció que:
       ○ Retorna el llistat de receptes en el cas que searchTerm estigui buit.
       ○ Retorna la col·lecció de receptes filtrada pels termes de cerca. Heu de buscar si
@@ -130,9 +65,22 @@ export default defineComponent({
         listaFiltrada = this.recipeList;
       }
       return listaFiltrada;
-    }, 
+    },
+    
   },     
   methods: {
+    /*getRecetas(){
+      axios
+         .get("http://localhost:3000/recipes")
+         .then((res) => {
+           this.recipeList = res.data.recipes;
+           console.log(this.recipeList);
+         })
+         .catch((error) => {
+           console.log(error);
+         });
+         
+    },*/
   /* Afegeix un objecte de tipus Recipe a l'array d'elements recipeList. */
     addRecipe(recipe){
       this.recipeList.push(recipe);
