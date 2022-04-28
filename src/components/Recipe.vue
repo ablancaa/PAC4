@@ -52,6 +52,7 @@ export default defineComponent({
       required: true,
     },
   },
+  setup(){},
   methods: {
     /* Aquest mètode s'ha d'executar cada vegada que es fes clic al botó amb la X. 
       Haureu d'emetre els esdeveniments següents: 

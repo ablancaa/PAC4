@@ -24,6 +24,7 @@ export default defineComponent({
         return {
       }
     },
+    setup(){},
     computed: {},
     methods: {
     /* Esdeveniment encarregat d'informar que s'ha eliminat una recepta amb

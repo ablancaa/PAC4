@@ -21,6 +21,7 @@ export default defineComponent({
 
     }
   },
+  setup(){},
   computed: {},
   methods: {
     /* Aquest mètode s'encarregarà d'emetre un esdeveniment show-form. S’haurà

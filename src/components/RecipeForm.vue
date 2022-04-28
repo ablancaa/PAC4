@@ -82,6 +82,7 @@ export default defineComponent({
                 recipe:{},
             }
         },
+        setup(){},
         created(){},
         mounted(){},
         methods: {
