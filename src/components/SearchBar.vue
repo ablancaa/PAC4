@@ -18,12 +18,12 @@ import { defineComponent, ref } from "vue";
 export default defineComponent({
   name: "SearchBar",
    components: {},
-  data() {
+  /*data() {
     return {
       //consulta: '',
 
     }
-  },
+  },*/
   setup(context){
     let showModal = ref(false);
     let consulta = ref('');
@@ -41,21 +41,22 @@ export default defineComponent({
     }
      /* Aquest mètode s'encarregarà de buidar l'element input del camp de cerca.
      S’haurà d’executar quan es faci clic al botó “Clear Search”. */
-    const clearSearch = ()=>{
+    const clearSearch = () => {
     consulta = document.getElementById("consulta").value="";
-    context.emit('clearSearch', consulta.value);
+    context.emit('clearSearch', consulta.value)
     console.log("Función clearSearch(){} Campo reseteado");
     }
      /*Aquest mètode s'executarà cada vegada que es modifiqui l'element
      input del camp de cerca (cada vegada que es teclegi una lletra). Emetrà un esdeveniment
      'search' amb el contingut del camp de cerca */
     const search = (newVal)=>{
-    console.log("Letra picada en Search Bar Input");
-      if(newVal != ''){
-        context.emit('newVal', consulta.value);
-        console.log("Contenido de newVal: "+consulta.value);
+      console.log("Letra picada en Search Bar Input");
+        if(newVal != ''){
+          context.emit('newVal', consulta.value);
+          console.log("Contenido de newVal: "+consulta.value);
         }
     }  
+    
     return { consulta, showForm, clearSearch, search };
   },//FIN SETUP()
   computed: {},
