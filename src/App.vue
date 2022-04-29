@@ -17,7 +17,7 @@ import RecipeForm from "./components/RecipeForm.vue";
 import SearchBar from "./components/SearchBar.vue";
 import axios from "axios";
 //import CompositionApi from '@vue/composition-api';
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 
 export default defineComponent({
   name: "App",
@@ -28,11 +28,23 @@ export default defineComponent({
   },
   data: () => ({
     recipeList: [],
-    showModal: false,
+    //showModal: false,
     searchTerm:'',
     filterData: [],  
   }),
-  setup(){},
+  setup(){
+    let showModal = ref(false);
+    /*Modifica l'estat del paràmetre showModal al seu invers.*/
+    const toggleForm = (info) =>{
+      if (info == true){
+        showModal.value = true;
+      } else {
+        showModal.value = false;
+      }
+    }  
+
+   return {toggleForm}
+  },
   
   async created(){ 
     //Carga el listado de recetas del servidor
@@ -87,13 +99,13 @@ export default defineComponent({
     },
 
   /*Modifica l'estat del paràmetre showModal al seu invers.*/
-    toggleForm(info){
+   /* toggleForm(info){
       if (info == true){
         this.showModal = true;
       } else {
         this.showModal = false;
       }
-    },
+    },*/
     
   /*Actualitza un paràmetre searchTerm (de nova creació al component) amb
   la informació rebuda a l'esdeveniment.*/
