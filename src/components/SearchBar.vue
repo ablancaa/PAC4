@@ -24,8 +24,8 @@ export default defineComponent({
 
     }
   },
-  setup(){
-    //let showModal = ref('');
+  setup(context){
+    let showModal = ref('');
     let consulta = ref('');
     console.log("Setup en SearchBar variable consulta: "+consulta.value)
     
@@ -35,44 +35,54 @@ export default defineComponent({
 
     /* Aquest mètode s'encarregarà d'emetre un esdeveniment show-form. S’haurà
     d’executar quan es faci clic al botó “Add a new recipe”. */
-   /* const showForm = ()=>{
-      
-      this.$emit('openForm', showModal.value = true);
+    const showForm = ()=>{
+      context.emit('openForm', showModal.value = true);
       console.log("Emitido de SearchBar: "+showModal.value);
-    }*/
-    
-    
-    
-    
-
-
-    return { consulta };
-  },
+    }
+     /* Aquest mètode s'encarregarà de buidar l'element input del camp de cerca.
+     S’haurà d’executar quan es faci clic al botó “Clear Search”. */
+    const clearSearch = ()=>{
+    consulta = document.getElementById("consulta").value="";
+    context.emit('clearSearch', consulta.value);
+    console.log("Función clearSearch(){} Campo reseteado");
+    }
+     /*Aquest mètode s'executarà cada vegada que es modifiqui l'element
+     input del camp de cerca (cada vegada que es teclegi una lletra). Emetrà un esdeveniment
+     'search' amb el contingut del camp de cerca */
+    const search = (newVal)=>{
+    console.log("Letra picada en Search Bar Input");
+      if(newVal != ''){
+        context.emit('newVal',consulta.value);
+        console.log("Contenido de newVal: "+consulta.value);
+        }
+    }  
+    return { consulta, showForm, clearSearch, search };
+  },//FIN SETUP()
   computed: {},
   methods: {
     /* Aquest mètode s'encarregarà d'emetre un esdeveniment show-form. S’haurà
     d’executar quan es faci clic al botó “Add a new recipe”. */
-    showForm(){
+    /*showForm(){
       this.$emit('openForm', this.showModal = true);
       console.log("Emitido de SearchBar: "+this.showModal);
-    },
+    },*/
     /* Aquest mètode s'encarregarà de buidar l'element input del camp de cerca.
     S’haurà d’executar quan es faci clic al botó “Clear Search”. */
-    clearSearch(){
+    /*clearSearch(){
       this.consulta = document.getElementById("consulta").value="";
       this.$emit('clearSearch', this.consulta);
       console.log("Función clearSearch(){} Campo reseteado");
-    },
+    },*/
     /*Aquest mètode s'executarà cada vegada que es modifiqui l'element
     input del camp de cerca (cada vegada que es teclegi una lletra). Emetrà un esdeveniment
     'search' amb el contingut del camp de cerca */
-    search(newVal){
+    /* search(newVal){
       console.log("Letra picada en Search Bar Input");
       if(newVal != ''){
         this.$emit('newVal', this.consulta);
         console.log("Contenido de newVal: "+ this.consulta);
       }
-    },
+    },*/
   }//FIN DE METHODS
 
 });//FIN EXPORT DEFAULT
