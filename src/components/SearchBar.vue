@@ -1,6 +1,6 @@
 <template>
   <div class="search">
-    <p>Consulta: {{ consulta }}</p>
+    <!-- <p>Consulta: {{ consulta }}</p> -->
     <div>
     <form @submit.prevent="busqueda"> 
        <input type="text" id="consulta" v-model="consulta" @keyup="search" placeholder="Search for a recipe" />
@@ -25,12 +25,26 @@ export default defineComponent({
     }
   },
   setup(){
+    //let showModal = ref('');
     let consulta = ref('');
     console.log("Setup en SearchBar variable consulta: "+consulta.value)
     
-    setTimeout(()=> {
-      //user.value='Oscar Blanca';
-    },3000)
+    /* setTimeout(()=> {
+         user.value='';
+       }, 3000) */
+
+    /* Aquest mètode s'encarregarà d'emetre un esdeveniment show-form. S’haurà
+    d’executar quan es faci clic al botó “Add a new recipe”. */
+   /* const showForm = ()=>{
+      
+      this.$emit('openForm', showModal.value = true);
+      console.log("Emitido de SearchBar: "+showModal.value);
+    }*/
+    
+    
+    
+    
+
 
     return { consulta };
   },
