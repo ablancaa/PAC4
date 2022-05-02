@@ -26,6 +26,7 @@ export default defineComponent({
     RecipeForm,
     SearchBar,
   },
+  emit: ['openForm'],
   data: () => ({
     recipeList: [],
     //showModal: false,
@@ -33,7 +34,7 @@ export default defineComponent({
     filterData: [],  
   }),
   setup(){
-    let showModal = ref(false);
+    let showModal = ref('');
     /*Modifica l'estat del paràmetre showModal al seu invers.*/
     const toggleForm = (info) =>{
       if (info == true){

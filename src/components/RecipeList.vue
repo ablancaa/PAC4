@@ -19,11 +19,11 @@ export default defineComponent({
     }
     },
     components: { Recipe },
-    
+    /*
     data() {
         return {
       }
-    },
+    },*/
     setup(props, context){
       props.recipeList;
       /* Esdeveniment encarregat d'informar que s'ha eliminat una recepta amb

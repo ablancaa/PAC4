@@ -16,6 +16,7 @@
 
 import { defineComponent, ref } from "vue";
 export default defineComponent({
+  
   name: "SearchBar",
    components: {},
   /*data() {
@@ -24,7 +25,8 @@ export default defineComponent({
 
     }
   },*/
-  setup(context){
+  //emit: ['openForm'],
+  setup(context, {emit}){
     let showModal = ref(false);
     let consulta = ref('');
     console.log("Setup en SearchBar variable consulta: "+consulta.value)
@@ -36,15 +38,15 @@ export default defineComponent({
     /* Aquest mètode s'encarregarà d'emetre un esdeveniment show-form. S’haurà
     d’executar quan es faci clic al botó “Add a new recipe”. */
     const showForm = () => {
-      context.emit('openForm', showModal.value = true);
+      emit('openForm', showModal.value = true);
       console.log("Emitido de SearchBar: "+showModal.value);
     }
      /* Aquest mètode s'encarregarà de buidar l'element input del camp de cerca.
      S’haurà d’executar quan es faci clic al botó “Clear Search”. */
     const clearSearch = () => {
-    consulta = document.getElementById("consulta").value="";
-    context.emit('clearSearch', consulta.value)
-    console.log("Función clearSearch(){} Campo reseteado");
+      consulta = document.getElementById("consulta").value="";
+      context.emit('clearSearch', consulta.value)
+      console.log("Función clearSearch(){} Campo reseteado");
     }
      /*Aquest mètode s'executarà cada vegada que es modifiqui l'element
      input del camp de cerca (cada vegada que es teclegi una lletra). Emetrà un esdeveniment

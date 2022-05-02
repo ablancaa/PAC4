@@ -52,10 +52,27 @@ export default defineComponent({
       required: true,
     },
   },
-  setup(props){
-    let recipe = ref([]);
-    console.log(props.recipe, recipe.value);
-    return  recipe;
+  setup(props, context){
+    let recipeList = ref([]);
+    let receta = ref([]);
+    console.log(props.recipe, receta.value);
+
+      const deleteRecipe = async () => {
+      try {
+        let response = await axios.delete("http://localhost:3000/recipe/",{ data: { id: receta.value.id } });
+        console.log("Response: "+response); 
+        recipeList.value = response.data.recipe;
+        context.emit("deleteRecipe", receta.value.id);
+    
+      } catch (error){
+          console.log(error);
+          console.log("No funciona el borrado");
+        }
+        console.log(this.result);
+        console.log("Desde Recipe: "+receta.value.id);
+      } 
+
+    return  { receta, deleteRecipe };
    
   },
   methods: {
@@ -63,7 +80,7 @@ export default defineComponent({
       Haureu d'emetre els esdeveniments següents: 
         ○ delete-recipe(id): Esdeveniment encarregat d'informar que s'ha eliminat 
           una recepta. Indica l'identificador id de la recepta com a paràmetre.*/
-    async deleteRecipe () {
+    /*async deleteRecipe () {
       try {
         let response = await axios.delete("http://localhost:3000/recipe/",{ data: { id: this.recipe.id } });      
         console.log("Response: "+response); 
@@ -78,7 +95,7 @@ export default defineComponent({
       console.log(this.result);
       
       console.log("Desde Recipe: "+this.recipe.id);
-    } 
+    } */
   },//FIN METHODS
 });
 </script>
