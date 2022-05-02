@@ -43,6 +43,17 @@ let recipesList = [
     imageUrl:
       "https://www.unileverfoodsolutions.es/dam/global-ufs/mcos/SPAIN/calcmenu/recipes/ES-recipes/In-Development/american-bbq-beef-salad/main-header.jpg",
   },
+  {
+    id: "a5112c20-c706-11ec-814b-4d3743a207b4",
+    servings: 2,
+    time: "1h",
+    difficulty: "Medium",
+    title: "Pollo asado",
+    ingredients: ["chicken", "onion", "patatoes"],
+    directions: ["cut chicken", "cut onion", "cut patatoes"],
+    imageUrl:
+      "https://mui.kitchen/__export/1627825762891/sites/muikitchen/img/2021/08/01/pollo-al-horno-con-limon.jpg_736925030.jpg",
+  },
 ];
 
 let recipe = {
