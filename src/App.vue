@@ -17,7 +17,7 @@ import RecipeForm from "./components/RecipeForm.vue";
 import SearchBar from "./components/SearchBar.vue";
 import axios from "axios";
 //import CompositionApi from '@vue/composition-api';
-import { defineComponent, ref } from "vue";
+import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "App",
@@ -29,23 +29,58 @@ export default defineComponent({
   emit: ['openForm'],
   data: () => ({
     recipeList: [],
-    //showModal: false,
+    showModal: false,
     searchTerm:'',
     filterData: [],  
   }),
-  setup(){
-    let showModal = ref('');
-    /*Modifica l'estat del paràmetre showModal al seu invers.*/
-    const toggleForm = (info) =>{
-      if (info == true){
-        showModal.value = true;
-      } else {
-        showModal.value = false;
-      }
-    }  
+  // setup(){
+    // let recipeList = ref([]);
+    // let showModal = ref('');
+    // /*Modifica l'estat del paràmetre showModal al seu invers.*/
+    // const toggleForm = (info) =>{
+      // if (info == true){
+        // showModal.value = true;
+      // } else {
+        // showModal.value = false;
+      // }
+    // }
 
-   return {toggleForm}
-  },
+    // const deleteRecipe = (recipeId) => {
+      // let busqueda = recipeId;
+      // console.log("Tenemos el array de recetas: ", recipeList.value);
+      // console.log("Buscando en donde el ID de la receta sea igual a: ", busqueda);
+      // let indice = recipeList.value.findIndex(receta => receta.id === busqueda);
+      // console.log("La receta buscada está en el índice ", indice);
+      // //Elimina la receta con el id seleccionado
+      // recipeList.value.splice(indice, 1);
+    // }
+
+    // const recipeListFiltered = () => {
+      // let listaFiltrada = [];
+
+      // if(this.searchTerm != ''){
+        // listaFiltrada = this.recipeList.filter(recipe => 
+          // recipe.title.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+          // recipe.ingredients.includes(this.searchTerm.toLowerCase()),
+        // )
+      // } else {
+        // listaFiltrada = this.recipeList;
+      // }
+      //  return listaFiltrada;
+    // }
+    
+    // const setSearchTerm = (info) => {
+      // this.searchTerm = info;
+        // if (this.searchTerm == ''){
+          // this.recipeListFiltered;
+        // }
+        // console.log("setSearchInfo(): "+this.searchTerm);
+        // //this.recipeListFiltered();   
+    // }
+
+    
+    // return {toggleForm, deleteRecipe, recipeListFiltered, setSearchTerm}
+  // },
   
   async created(){ 
     //Carga el listado de recetas del servidor
@@ -100,13 +135,13 @@ export default defineComponent({
     },
 
   /*Modifica l'estat del paràmetre showModal al seu invers.*/
-   /* toggleForm(info){
+    toggleForm(info){
       if (info == true){
         this.showModal = true;
       } else {
         this.showModal = false;
       }
-    },*/
+    },
     
   /*Actualitza un paràmetre searchTerm (de nova creació al component) amb
   la informació rebuda a l'esdeveniment.*/
