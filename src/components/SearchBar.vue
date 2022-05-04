@@ -4,7 +4,7 @@
     <div>
     <form @submit.prevent="busqueda"> 
        <input type="text" id="consulta" v-model="consulta" @search="search" placeholder="Search for a recipe" />
-       <button v-if="consulta != ''" @click="clearSearch">Clear Search</button>
+       <button v-if="consulta.length" @click="clearSearch">Clear Search</button>
     </form>
     </div>
     <button @click="showForm">Add a new recipe</button>
@@ -14,30 +14,16 @@
 </template>
 <script>
 
-import { defineComponent, ref, } from "vue";
+import { defineComponent, ref, watch} from "vue";
 export default defineComponent({
   
   name: "SearchBar",
-   components: {},
-  /*data() {
-    return {
-      //consulta: '',
-
-    }
-  },*/
-  //props: ['query'],
+  components: {},
   emits: ['openForm', 'clearSearch', 'newVal'],
   setup(props, context){
-   // const query = reactive({
-   // consulta: '',
-  //})
     let showModal = ref(false);
     let consulta = ref('');
     console.log("Setup en SearchBar variable consulta: "+consulta.value)
-    
-    /* setTimeout(()=> {
-         user.value='';
-       }, 3000) */
 
     /* Aquest mètode s'encarregarà d'emetre un esdeveniment show-form. S’haurà
     d’executar quan es faci clic al botó “Add a new recipe”. */
@@ -49,20 +35,28 @@ export default defineComponent({
      S’haurà d’executar quan es faci clic al botó “Clear Search”. */
     const clearSearch = () => {
       consulta.value = document.getElementById("consulta").value="";
-      context.emit('clearSearch', consulta.value);
+      //context.emit('clearSearch', consulta.value);
       console.log("Función clearSearch(){} Campo reseteado");
     }
      /*Aquest mètode s'executarà cada vegada que es modifiqui l'element
      input del camp de cerca (cada vegada que es teclegi una lletra). Emetrà un esdeveniment
      'search' amb el contingut del camp de cerca */
-    const search = () => {
+    /*const search = () => {
       console.log("Letra picada en Search Bar Input");
         if(consulta.value != ''){
           context.emit('newVal', consulta.value);
           console.log("Contenido de newVal: "+consulta.value);
         }
-    }  
-    return { showForm, clearSearch, search, consulta };
+    }*/
+    const search = ref(consulta);   
+    watch(search, (currentValue, oldValue) => {
+      console.log(currentValue);
+      console.log(oldValue);
+      context.emit("newVal", search);
+    });
+  
+    return { showForm, clearSearch, consulta, watch, search };
+
   },//FIN SETUP()
   computed: {},
   methods: {
