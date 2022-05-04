@@ -63,7 +63,7 @@
 <script>
 import { defineComponent, ref } from "vue";
 import { uuid } from 'vue-uuid';
-import axios from "axios";
+//import axios from "axios";
 export default defineComponent({
   name: "RecipeForm",
    /*data() {
@@ -82,7 +82,8 @@ export default defineComponent({
                 recipe:{},
             }
         },*/
-        setup(context, {emit}){
+        emits:['nuevaReceta','closeForm'],
+        setup(props, context){
           let showModal = ref(false);
           let recipe = ref({
             id: uuid.v1(),
@@ -96,7 +97,7 @@ export default defineComponent({
             featured: ''
           });
 
-          const createRecipe = async () => {
+          const createRecipe = () => {
             var error = document.getElementById("errores");
             var add = document.getElementById("add");
 
@@ -146,38 +147,40 @@ export default defineComponent({
                     directions: directionsUnaAuno,
                     featured: recipe.value.featured,
                 };
-                  try {
-                    let response = await axios.post("http://localhost:3000/recipe/", receta);
-                    console.log("Dentro de función createRecipe"); 
-                    console.log(response); 
-                    //this.recipeList = response.data.recipe;
-                  } catch (error){
-                    console.log(error);
-                    console.log("No funciona el borrado");
-                  }
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
             //Emite la receta nueva a App
-               emit('nuevaReceta', receta);
-            //Cierra la ventana modal
-               //this.$emit('cerrarForm', this.showModal=false);
+               context.emit('nuevaReceta', receta);
+
             //Muestra datos de receta por consola
-                console.log("Emitida nueva receta: "+receta);
+                console.log("Emitida nueva receta");
+                console.log(receta);
+
             //Pongo el Div de error en blanco
                 error.innerHTML = '';
+
             //Indico en el Div add que se añade la receta nueva
                 add.innerHTML = 'Add recipe <br/>';
                 add.innerHTML += '<br/>';
 
             //Datos introducidos mostrados por consola
-                console.log("//DATOS INTRODUCIDOS EN FORMULARIO")
-                console.log("Id: "+recipe.value.id);
-                console.log("Title: "+recipe.value.title);
-                console.log("imageURL: "+recipe.value.imageUrl);
-                console.log("Servings: "+recipe.value.servings);
-                console.log("Time: "+recipe.value.time);
-                console.log("Difficulty: "+recipe.value.difficulty);
-                console.log("Igredients: "+recipe.value.ingredients);
-                console.log("Directions: "+recipe.value.directions);
-                console.log("Featured: "+recipe.value.featured);
+                // console.log("//DATOS INTRODUCIDOS EN FORMULARIO")
+                // console.log("Id: "+recipe.value.id);
+                // console.log("Title: "+recipe.value.title);
+                // console.log("imageURL: "+recipe.value.imageUrl);
+                // console.log("Servings: "+recipe.value.servings);
+                // console.log("Time: "+recipe.value.time);
+                // console.log("Difficulty: "+recipe.value.difficulty);
+                // console.log("Igredients: "+recipe.value.ingredients);
+                // console.log("Directions: "+recipe.value.directions);
+                // console.log("Featured: "+recipe.value.featured);
 
             //Reinicio los campos
                 // document.getElementById("id").value = ' ';
@@ -197,7 +200,7 @@ export default defineComponent({
           }//FIN createRecipe()
 
           const closeForm = () => {
-            emit('closeForm', showModal.value = false);
+            context.emit('closeForm', showModal.value = false);
             //Chivato para ver si emite
             //console.log("Función closeForm(){}: "+ this.showModal);
           }//FIN closeForm()

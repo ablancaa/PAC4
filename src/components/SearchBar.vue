@@ -25,8 +25,8 @@ export default defineComponent({
 
     }
   },*/
-  //emit: ['openForm'],
-  setup(context, {emit}){
+  emits: ['openForm', 'clearSearch', 'newVal'],
+  setup(props, context){
     let showModal = ref(false);
     let consulta = ref('');
     console.log("Setup en SearchBar variable consulta: "+consulta.value)
@@ -38,24 +38,24 @@ export default defineComponent({
     /* Aquest mètode s'encarregarà d'emetre un esdeveniment show-form. S’haurà
     d’executar quan es faci clic al botó “Add a new recipe”. */
     const showForm = () => {
-      emit('openForm', showModal.value = true);
+      context.emit('openForm', showModal.value = true);
       console.log("Emitido de SearchBar: "+showModal.value);
     }
      /* Aquest mètode s'encarregarà de buidar l'element input del camp de cerca.
      S’haurà d’executar quan es faci clic al botó “Clear Search”. */
     const clearSearch = () => {
       consulta.value = document.getElementById("consulta").value="";
-      emit('clearSearch', consulta.value);
+      context.emit('clearSearch', consulta.value);
       console.log("Función clearSearch(){} Campo reseteado");
     }
      /*Aquest mètode s'executarà cada vegada que es modifiqui l'element
      input del camp de cerca (cada vegada que es teclegi una lletra). Emetrà un esdeveniment
      'search' amb el contingut del camp de cerca */
     const search = (newVal) => {
-      let valor = ref(newVal.value);
+      let valor = ref(newVal);
       console.log("Letra picada en Search Bar Input");
         if(valor.value != ''){
-          emit('newVal', valor.value);
+          context.emit('newVal', valor.value);
           console.log("Contenido de newVal: "+valor.value);
         }
     }  

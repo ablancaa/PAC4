@@ -52,26 +52,25 @@ export default defineComponent({
       required: true,
     },
   },
-  setup(props, {emit}){
+  emits: ['deleteRecipe'],
+  setup(props, context){
     //let recipe = ref(props.recipe);
     let recipeList = ref(props.recipe);
     let receta = ref([]);
-    console.log(props.recipeList, receta.value);
 
       const deleteRecipe = async () => {
       try {
         let response = await axios.delete("http://localhost:3000/recipe/",{ data: { id: recipeList.value.id } });
-        console.log("Response: "+response); 
+        console.log("FUNCIÓN: deleteRecipe() desde Recipe");
+        console.log(response); 
         recipeList.value = response.data.recipe;
-        emit("deleteRecipe", receta.value.id);
+        context.emit("deleteRecipe", receta.value.id);
     
-      } catch (error){
+        } catch (error){
           console.log(error);
           console.log("No funciona el borrado");
         }
-        //console.log(this.result);
-        //console.log("Desde Recipe: "+recipeList.value.id);
-      } 
+      }////FIN deleteRecipe()
 
     return  { receta, deleteRecipe };
    
