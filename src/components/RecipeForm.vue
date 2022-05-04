@@ -82,133 +82,114 @@ export default defineComponent({
                 recipe:{},
             }
         },*/
-        emits:['nuevaReceta','closeForm'],
-        setup(props, context){
-          let showModal = ref(false);
-          let recipe = ref({
-            id: uuid.v1(),
-            title: '',
-            imageUrl: '',
-            servings: '',
-            time: '', 
-            difficulty: '',
-            ingredients: [],
-            directions: [],
-            featured: ''
-          });
-
-          const createRecipe = () => {
-            var error = document.getElementById("errores");
-            var add = document.getElementById("add");
-
-            //Valida que los campos no esten vacíos
-            if(recipe.value.title == '' || recipe.value.ingredients == '' || recipe.value.directions == '') {
-            //Chivatos de campos vacios
-              console.log(recipe.value.id);
-              console.log("Titulo vacio!!");
-              console.log("Ingredientes Vacio!!");
-              console.log("Indicaciones Vacio!!");
-            //Pinta en pantalla el error
-              error.innerHTML = 'The fields Title, Ingredients and Directions are required <br/>';
-              error.innerHTML += '<br/>';
-              add.innerHTML = '';
+    emits:['nuevaReceta','closeForm'],
+    setup(props, context){
+      let showModal = ref(false);
+      let recipe = ref({
+        id: uuid.v1(),
+        title: '',
+        imageUrl: '',
+        servings: '',
+        time: '', 
+        difficulty: '',
+        ingredients: [],
+        directions: [],
+        featured: ''
+      })
+        const createRecipe = () => {
+          var error = document.getElementById("errores");
+          var add = document.getElementById("add");
+          //Valida que los campos no esten vacíos
+          if(recipe.value.title == '' || recipe.value.ingredients == '' || recipe.value.directions == '') {
+          //Chivatos de campos vacios
+            console.log(recipe.value.id);
+            console.log("Titulo vacio!!");
+            console.log("Ingredientes Vacio!!");
+            console.log("Indicaciones Vacio!!");
+          //Pinta en pantalla el error
+            error.innerHTML = 'The fields Title, Ingredients and Directions are required <br/>';
+            error.innerHTML += '<br/>';
+            add.innerHTML = '';
+          } else {
+          //Separo ingredientes e indicaciones si tienen un punto                        
+            let ingredienteUnaAuno = recipe.value.ingredients;
+            ingredienteUnaAuno = recipe.value.ingredients.split('.');
+            console.log("Ingredientes Separados: "+ingredienteUnaAuno);
+            let directionsUnaAuno = recipe.value.directions;
+            //directionsUnaAuno = this.directions.search('.');
+            directionsUnaAuno = recipe.value.directions.split('.');
+            //directionsUnaAuno = this.directions.split('\n');
+            console.log("Directions Separados: "+directionsUnaAuno);
+          /* let directionsUnaAuno = this.directions;
+            directionsUnaAuno = this.directions.replace(/\s/g, ' .');
+            console.log("Directions Separados: "+directionsUnaAuno);
+          */
+          //Indico si tiene el featured activado
+            if(recipe.value.featured==''){
+              recipe.value.featured = false;
             } else {
-            //Separo ingredientes e indicaciones si tienen un punto                        
-              let ingredienteUnaAuno = recipe.value.ingredients;
-              ingredienteUnaAuno = recipe.value.ingredients.split('.');
-              console.log("Ingredientes Separados: "+ingredienteUnaAuno);
+              recipe.value.featured = true;
+            }
+          //Creo el objeto receta para pasar a App 
+              let receta = {
+                  id: recipe.value.id, 
+                  title: recipe.value.title, 
+                  imageUrl: recipe.value.imageUrl, 
+                  servings: recipe.value.servings,
+                  time: recipe.value.time,
+                  difficulty: recipe.value.difficulty,
+                  ingredients: ingredienteUnaAuno,
+                  directions: directionsUnaAuno,
+                  featured: recipe.value.featured,
+              };
+          //Emite la receta nueva a App
+             context.emit('nuevaReceta', receta);
 
-              let directionsUnaAuno = recipe.value.directions;
-              //directionsUnaAuno = this.directions.search('.');
-              directionsUnaAuno = recipe.value.directions.split('.');
-              //directionsUnaAuno = this.directions.split('\n');
+          //Muestra datos de receta por consola
+              console.log("Emitida nueva receta");
+              console.log(receta);
 
-              console.log("Directions Separados: "+directionsUnaAuno);
-            /* let directionsUnaAuno = this.directions;
-              directionsUnaAuno = this.directions.replace(/\s/g, ' .');
-              console.log("Directions Separados: "+directionsUnaAuno);
-            */
-            //Indico si tiene el featured activado
-              if(recipe.value.featured==''){
-                recipe.value.featured = false;
-              } else {
-                recipe.value.featured = true;
-              }
+          //Pongo el Div de error en blanco
+              error.innerHTML = '';
+              
+          //Indico en el Div add que se añade la receta nueva
+              add.innerHTML = 'Add recipe <br/>';
+              add.innerHTML += '<br/>';
+          //Datos introducidos mostrados por consola
+              // console.log("//DATOS INTRODUCIDOS EN FORMULARIO")
+              // console.log("Id: "+recipe.value.id);
+              // console.log("Title: "+recipe.value.title);
+              // console.log("imageURL: "+recipe.value.imageUrl);
+              // console.log("Servings: "+recipe.value.servings);
+              // console.log("Time: "+recipe.value.time);
+              // console.log("Difficulty: "+recipe.value.difficulty);
+              // console.log("Igredients: "+recipe.value.ingredients);
+              // console.log("Directions: "+recipe.value.directions);
+              // console.log("Featured: "+recipe.value.featured);
+          //Reinicio los campos
+              // document.getElementById("id").value = ' ';
+              // document.getElementById("title").value = ' ';
+              // recipe.value.id = '';
+              // recipe.value.title = '';
+              // recipe.value.imageUrl = ''; 
+              // recipe.value.servings = '';
+              // recipe.value.time = '';
+              // recipe.value.difficulty= '';
+              // recipe.value.ingredients = '';
+              // recipe.value.directions = '';
+              // recipe.value.featured = '';
+          }//Fin if/else
+    
+        }//FIN createRecipe()
 
-            //Creo el objeto receta para pasar a App 
-                let receta = {
-                    id: recipe.value.id, 
-                    title: recipe.value.title, 
-                    imageUrl: recipe.value.imageUrl, 
-                    servings: recipe.value.servings,
-                    time: recipe.value.time,
-                    difficulty: recipe.value.difficulty,
-                    ingredients: ingredienteUnaAuno,
-                    directions: directionsUnaAuno,
-                    featured: recipe.value.featured,
-                };
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-            //Emite la receta nueva a App
-               context.emit('nuevaReceta', receta);
-
-            //Muestra datos de receta por consola
-                console.log("Emitida nueva receta");
-                console.log(receta);
-
-            //Pongo el Div de error en blanco
-                error.innerHTML = '';
-
-            //Indico en el Div add que se añade la receta nueva
-                add.innerHTML = 'Add recipe <br/>';
-                add.innerHTML += '<br/>';
-
-            //Datos introducidos mostrados por consola
-                // console.log("//DATOS INTRODUCIDOS EN FORMULARIO")
-                // console.log("Id: "+recipe.value.id);
-                // console.log("Title: "+recipe.value.title);
-                // console.log("imageURL: "+recipe.value.imageUrl);
-                // console.log("Servings: "+recipe.value.servings);
-                // console.log("Time: "+recipe.value.time);
-                // console.log("Difficulty: "+recipe.value.difficulty);
-                // console.log("Igredients: "+recipe.value.ingredients);
-                // console.log("Directions: "+recipe.value.directions);
-                // console.log("Featured: "+recipe.value.featured);
-
-            //Reinicio los campos
-                // document.getElementById("id").value = ' ';
-                // document.getElementById("title").value = ' ';
-                // recipe.value.id = '';
-                // recipe.value.title = '';
-                // recipe.value.imageUrl = ''; 
-                // recipe.value.servings = '';
-                // recipe.value.time = '';
-                // recipe.value.difficulty= '';
-                // recipe.value.ingredients = '';
-                // recipe.value.directions = '';
-                // recipe.value.featured = '';
-
-            }//Fin if/else
-      
-          }//FIN createRecipe()
-
-          const closeForm = () => {
-            context.emit('closeForm', showModal.value = false);
-            //Chivato para ver si emite
-            //console.log("Función closeForm(){}: "+ this.showModal);
-          }//FIN closeForm()
+        const closeForm = () => {
+          context.emit('closeForm', showModal.value = false);
+          //Chivato para ver si emite
+          //console.log("Función closeForm(){}: "+ this.showModal);
+        }//FIN closeForm()
 
       return { createRecipe, closeForm, recipe }
-
-
-        },
+      },
         created(){},
         mounted(){},
         methods: {
