@@ -116,28 +116,40 @@ export default defineComponent({
   },     
   methods: {
   /* Afegeix un objecte de tipus Recipe a l'array d'elements recipeList. */
-   addRecipe(recipe){
-      this.recipeList.push(recipe);
-      console.log("receta añadida: "+recipe);
+   async addRecipe(recipe){
+          try {
+            let response = await axios.post("http://localhost:3000/recipe/", recipe);
+            console.log("Dentro de función createRecipe"); 
+            console.log(response); 
+          } catch (error) {
+              console.log(error);
+              console.log("No funciona el añadir receta");
+          }
+          //Vuelve a solicitar la lista al servidor
+          try {
+            let response = await axios.get('http://localhost:3000/recipes/');
+            this.recipeList= response.data.recipes;
+            console.log("FUNCIÓN: deleteRecipe() en App");
+            console.log(response);
+          } catch (error) {
+              console.log(error);
+              console.log("La lista no puede aparacer");
+          }
     },
 
   /*Elimina l'objecte de la llista recipeList l'identificador id és el
   passat per paràmetre.*/
-   async deleteRecipe(recipeId){
+   async deleteRecipe(){
+     //Vuelve a solicitar la lista al servidor
        try {
         let response = await axios.get('http://localhost:3000/recipes/');
         this.recipeList= response.data.recipes;
-        console.log(response, recipeId);
+        console.log("FUNCIÓN: deleteRecipe() en App");
+        console.log(response);
+        console.log("La receta se ha borrado");
         } catch (error){
           console.log(error);
         }
-      /*let busqueda = recipeId;
-      console.log("Tenemos el array de recetas: ", this.recipeList);
-      console.log("Buscando en donde el ID de la receta sea igual a: ", busqueda);
-      let indice = this.recipeList.findIndex(receta => receta.id === busqueda);
-      console.log("La receta buscada está en el índice ", indice);
-      //Elimina la receta con el id seleccionado
-      this.recipeList.splice(indice, 1);*/
     },
 
   /*Modifica l'estat del paràmetre showModal al seu invers.*/
