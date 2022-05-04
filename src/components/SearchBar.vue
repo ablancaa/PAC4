@@ -25,6 +25,7 @@ export default defineComponent({
 
     }
   },*/
+  //props: ['consulta'],
   emits: ['openForm', 'clearSearch', 'newVal'],
   setup(props, context){
     let showModal = ref(false);
@@ -51,15 +52,13 @@ export default defineComponent({
      /*Aquest mètode s'executarà cada vegada que es modifiqui l'element
      input del camp de cerca (cada vegada que es teclegi una lletra). Emetrà un esdeveniment
      'search' amb el contingut del camp de cerca */
-    const search = (newVal) => {
-      let valor = ref(newVal);
+    const search = () => {
       console.log("Letra picada en Search Bar Input");
-        if(valor.value != ''){
-          context.emit('newVal', valor.value);
-          console.log("Contenido de newVal: "+valor.value);
+        if(consulta.value != ''){
+          context.emit('newVal', consulta.value);
+          console.log("Contenido de newVal: "+consulta.value);
         }
     }  
-
     return { showForm, clearSearch, search, consulta };
   },//FIN SETUP()
   computed: {},

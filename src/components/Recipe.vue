@@ -72,7 +72,7 @@ export default defineComponent({
         }
       }////FIN deleteRecipe()
 
-    return  { receta, deleteRecipe };
+    return  { deleteRecipe };
    
   },
   methods: {
