@@ -26,7 +26,7 @@ export default defineComponent({
     RecipeForm,
     SearchBar,
   },
-  //emit: ['openForm'],
+  emit: ['openForm'],
   data: () => ({
     recipeList: [],
     showModal: false,
@@ -123,15 +123,21 @@ export default defineComponent({
 
   /*Elimina l'objecte de la llista recipeList l'identificador id és el
   passat per paràmetre.*/
-   deleteRecipe(recipeId){
-    
-      let busqueda = recipeId;
+   async deleteRecipe(recipeId){
+       try {
+        let response = await axios.get('http://localhost:3000/recipes/');
+        this.recipeList= response.data.recipes;
+        console.log(response, recipeId);
+        } catch (error){
+          console.log(error);
+        }
+      /*let busqueda = recipeId;
       console.log("Tenemos el array de recetas: ", this.recipeList);
       console.log("Buscando en donde el ID de la receta sea igual a: ", busqueda);
       let indice = this.recipeList.findIndex(receta => receta.id === busqueda);
       console.log("La receta buscada está en el índice ", indice);
       //Elimina la receta con el id seleccionado
-      this.recipeList.splice(indice, 1);
+      this.recipeList.splice(indice, 1);*/
     },
 
   /*Modifica l'estat del paràmetre showModal al seu invers.*/
