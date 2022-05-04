@@ -177,12 +177,7 @@ export default defineComponent({
       //this.recipeListFiltered();   
     },
   },
-  watch:{
-    /*searchTerm: function(letra){
-      this.searchTerm = this.searchTerm+letra;
-      console.log("SearchTerm: "+this.searchTerm);
-    }*/
-  },
+  watch:{},
 });
 </script>
 
