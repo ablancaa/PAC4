@@ -181,14 +181,14 @@ export default defineComponent({
             //Datos introducidos mostrados por consola
                 console.log("//DATOS INTRODUCIDOS EN FORMULARIO")
                 console.log("Id: "+recipe.value.id);
-                // console.log("Title: "+recipe.value.title);
-                // console.log("imageURL: "+recipe.value.imageUrl);
-                // console.log("Servings: "+recipe.value.servings);
-                // console.log("Time: "+recipe.value.time);
-                // console.log("Difficulty: "+recipe.value.difficulty);
-                // console.log("Igredients: "+recipe.value.ingredients);
-                // console.log("Directions: "+recipe.value.directions);
-                // console.log("Featured: "+recipe.value.featured);
+                console.log("Title: "+recipe.value.title);
+                console.log("imageURL: "+recipe.value.imageUrl);
+                console.log("Servings: "+recipe.value.servings);
+                console.log("Time: "+recipe.value.time);
+                console.log("Difficulty: "+recipe.value.difficulty);
+                console.log("Igredients: "+recipe.value.ingredients);
+                console.log("Directions: "+recipe.value.directions);
+                console.log("Featured: "+recipe.value.featured);
 
             //Reinicio los campos
                 // document.getElementById("id") = '';
