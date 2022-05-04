@@ -54,6 +54,17 @@ let recipesList = [
     imageUrl:
       "https://mui.kitchen/__export/1627825762891/sites/muikitchen/img/2021/08/01/pollo-al-horno-con-limon.jpg_736925030.jpg",
   },
+    {
+    id: "a3333c33-c333-33ec-333b-3d3333a303b3",
+    servings: 2,
+    time: "1h",
+    difficulty: "Medium",
+    title: "Garbanzos",
+    ingredients: ["garbanzos", "onion", "patatoes"],
+    directions: ["lavar garbanzos", "cut onion", "cut patatoes"],
+    imageUrl:
+      "https://assets.tmecosys.com/image/upload/t_web767x639/img/recipe/ras/Assets/4cabc592-ca45-43ad-92d3-85e62e64700c/Derivates/c746b109-88dd-4bc6-b724-44e1fd971dd6.jpg",
+  },
 ];
 
 let recipe = {

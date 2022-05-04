@@ -52,10 +52,11 @@ export default defineComponent({
      input del camp de cerca (cada vegada que es teclegi una lletra). Emetrà un esdeveniment
      'search' amb el contingut del camp de cerca */
     const search = (newVal) => {
+      let valor = ref(newVal.value);
       console.log("Letra picada en Search Bar Input");
-        if(newVal != ''){
-          emit('newVal', consulta.value);
-          console.log("Contenido de newVal: "+consulta.value);
+        if(valor.value != ''){
+          emit('newVal', valor.value);
+          console.log("Contenido de newVal: "+valor.value);
         }
     }  
 
