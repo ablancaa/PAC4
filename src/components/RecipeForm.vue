@@ -180,7 +180,7 @@ export default defineComponent({
 
             //Datos introducidos mostrados por consola
                 console.log("//DATOS INTRODUCIDOS EN FORMULARIO")
-                // console.log("Id: "+recipe.value.id);
+                console.log("Id: "+recipe.value.id);
                 // console.log("Title: "+recipe.value.title);
                 // console.log("imageURL: "+recipe.value.imageUrl);
                 // console.log("Servings: "+recipe.value.servings);
