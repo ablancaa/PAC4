@@ -57,7 +57,10 @@ export default defineComponent({
     //let recipe = ref(props.recipe);
     let recipeList = ref(props.recipe);
     let receta = ref([]);
-
+    /* Aquest mètode s'ha d'executar cada vegada que es fes clic al botó amb la X. 
+       Haureu d'emetre els esdeveniments següents: 
+          ○ delete-recipe(id): Esdeveniment encarregat d'informar que s'ha eliminat 
+          una recepta. Indica l'identificador id de la recepta com a paràmetre.*/
       const deleteRecipe = async () => {
       try {
         let response = await axios.delete("http://localhost:3000/recipe",{ data: { id: recipeList.value.id } });
@@ -65,7 +68,6 @@ export default defineComponent({
         console.log(response); 
         recipeList.value = response.data.recipe;
         context.emit("deleteRecipe", receta.value.id);
-    
         } catch (error){
           console.log(error);
           console.log("No funciona el borrado");
@@ -75,28 +77,6 @@ export default defineComponent({
     return  { deleteRecipe };
    
   },
-  methods: {
-    /* Aquest mètode s'ha d'executar cada vegada que es fes clic al botó amb la X. 
-      Haureu d'emetre els esdeveniments següents: 
-        ○ delete-recipe(id): Esdeveniment encarregat d'informar que s'ha eliminat 
-          una recepta. Indica l'identificador id de la recepta com a paràmetre.*/
-    /*async deleteRecipe () {
-      try {
-        let response = await axios.delete("http://localhost:3000/recipe/",{ data: { id: this.recipe.id } });      
-        console.log("Response: "+response); 
-        this.recipeList = response.data.recipe;
-        this.$emit("deleteRecipe", this.recipe.id);
-        
-      } 
-      catch (error){
-        console.log(error);
-        console.log("No funciona el borrado");
-      }
-      console.log(this.result);
-      
-      console.log("Desde Recipe: "+this.recipe.id);
-    } */
-  },//FIN METHODS
 });
 </script>
 
