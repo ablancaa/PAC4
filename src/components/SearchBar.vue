@@ -44,8 +44,8 @@ export default defineComponent({
      /* Aquest mètode s'encarregarà de buidar l'element input del camp de cerca.
      S’haurà d’executar quan es faci clic al botó “Clear Search”. */
     const clearSearch = () => {
-      consulta = document.getElementById("consulta").value="";
-      context.emit('clearSearch', consulta.value)
+      consulta.value = document.getElementById("consulta").value="";
+      emit('clearSearch', consulta.value);
       console.log("Función clearSearch(){} Campo reseteado");
     }
      /*Aquest mètode s'executarà cada vegada que es modifiqui l'element
@@ -54,12 +54,12 @@ export default defineComponent({
     const search = (newVal) => {
       console.log("Letra picada en Search Bar Input");
         if(newVal != ''){
-          context.emit('newVal', consulta.value);
+          emit('newVal', consulta.value);
           console.log("Contenido de newVal: "+consulta.value);
         }
     }  
 
-    return { consulta, showForm, clearSearch, search };
+    return { showForm, clearSearch, search, consulta };
   },//FIN SETUP()
   computed: {},
   methods: {

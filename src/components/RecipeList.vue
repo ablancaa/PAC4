@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import { defineComponent} from "vue";
+import { defineComponent, ref} from "vue";
 import Recipe from "./Recipe.vue";
 
 export default defineComponent({
@@ -24,17 +24,17 @@ export default defineComponent({
         return {
       }
     },*/
-    setup(props, context){
-      props.recipeList;
+    setup(props, {emit}){
+      let idAborrar = ref(props.recipeList);
       /* Esdeveniment encarregat d'informar que s'ha eliminat una recepta amb
       identificador id.*/
       /* Esdeveniment encarregat d'informar que s'ha eliminat una recepta.
       Aquest esdeveniment es propagarà quan es capturi l'esdeveniment delete-recipe per part
       del component RecipeCard.vue.*/
       const deleteRecipe = () => {
-        context.emit('deleteRecipe', props.recipeListfo);
+        emit('deleteRecipe', idAborrar.value.id);
         console.log("Desde recipeList: ");
-        console.log(props.recipeList);
+        console.log(idAborrar.value.id);
       }
 
       return {deleteRecipe}

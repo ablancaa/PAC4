@@ -52,24 +52,25 @@ export default defineComponent({
       required: true,
     },
   },
-  setup(props, context){
-    let recipeList = ref([]);
+  setup(props, {emit}){
+    //let recipe = ref(props.recipe);
+    let recipeList = ref(props.recipe);
     let receta = ref([]);
-    console.log(props.recipe, receta.value);
+    console.log(props.recipeList, receta.value);
 
       const deleteRecipe = async () => {
       try {
-        let response = await axios.delete("http://localhost:3000/recipe/",{ data: { id: receta.value.id } });
+        let response = await axios.delete("http://localhost:3000/recipe/",{ data: { id: recipeList.value.id } });
         console.log("Response: "+response); 
         recipeList.value = response.data.recipe;
-        context.emit("deleteRecipe", receta.value.id);
+        emit("deleteRecipe", receta.value.id);
     
       } catch (error){
           console.log(error);
           console.log("No funciona el borrado");
         }
-        console.log(this.result);
-        console.log("Desde Recipe: "+receta.value.id);
+        //console.log(this.result);
+        //console.log("Desde Recipe: "+recipeList.value.id);
       } 
 
     return  { receta, deleteRecipe };

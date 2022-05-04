@@ -26,7 +26,7 @@ export default defineComponent({
     RecipeForm,
     SearchBar,
   },
-  emit: ['openForm'],
+  //emit: ['openForm'],
   data: () => ({
     recipeList: [],
     showModal: false,
@@ -98,7 +98,7 @@ export default defineComponent({
       ○ Retorna el llistat de receptes en el cas que searchTerm estigui buit.
       ○ Retorna la col·lecció de receptes filtrada pels termes de cerca. Heu de buscar si
         searchTerms forma part del nom de la recepta o dels ingredients a cada recepta. */
-    recipeListFiltered() {
+     recipeListFiltered() {
 
       let listaFiltrada = [];
       

@@ -17,23 +17,23 @@
       <form id="formulario" @submit.prevent="createRecipe">
         <div class="recipe-form-item">
           <label for="title">Title</label>
-          <input type="text" id="title" v-model="title" />
+          <input type="text" id="title" v-model="recipe.title" />
         </div>
         <div class="recipe-form-item">
           <label for="imageUrl">Image URL</label>
-          <input type="text" id="imageUrl" v-model="imageUrl"/>
+          <input type="text" id="imageUrl" v-model="recipe.imageUrl"/>
         </div>
         <div class="recipe-form-item">
           <label for="servings">Servings</label>
-          <input type="number" id="servings" v-model="servings"/>
+          <input type="number" id="servings" v-model="recipe.servings"/>
         </div>
         <div class="recipe-form-item">
           <label for="time">Time</label>
-          <input type="number" id="time" v-model="time"/>
+          <input type="number" id="time" v-model="recipe.time"/>
         </div>
         <div class="recipe-form-item">
           <label for="difficulty">Difficulty</label>
-          <select id="difficulty"  v-model="difficulty">
+          <select id="difficulty"  v-model="recipe.difficulty">
             <option value="Easy">Easy</option>
             <option value="Medium">Medium</option>
             <option value="Hard">Hard</option>
@@ -41,14 +41,14 @@
         </div>
         <div class="recipe-form-item">
           <label for="ingredients">Ingredients</label>
-          <textarea type="textarea" id="ingredients" v-model="ingredients"/>
+          <textarea type="textarea" id="ingredients" v-model="recipe.ingredients"/>
         </div>
         <div class="recipe-form-item">
           <label for="directions">Directions</label>
-          <textarea type="textarea" id="directions" v-model="directions"/>
+          <textarea type="textarea" id="directions" v-model="recipe.directions"/>
         </div>
         <div class="recipe-form-item">
-         <label for="checkbox">Featured</label><input type="checkbox" value="true" v-model="featured"/>
+         <label for="checkbox">Featured</label><input type="checkbox" value="true" v-model="recipe.featured"/>
          <!-- <label>{{ featured }}</label> -->
          </div>
         <div class="recipe-form-item">
@@ -82,28 +82,39 @@ export default defineComponent({
                 recipe:{},
             }
         },*/
-        setup(context){
+        setup(context, {emit}){
           let showModal = ref(false);
-          let id = ref(uuid.v1());
-          let title = ref('');
-          let imageUrl = ref('');
-          let servings = ref('');
-          let time = ref('');
-          let difficulty = ref('');
-          let ingredients = ref([]);
-          let directions = ref([]);
-          let featured = ref('');
+          //let id = ref(uuid.v1());
+          //let title = ref('');
+          //let imageUrl = ref('');
+          //let servings = ref('');
+          //let time = ref('');
+          //let difficulty = ref('');
+          //let ingredients = ref([]);
+          //let directions = ref([]);
+          //let featured = ref('');
           //let submit = ref('');
           //let mensajeError = ref('');
-          let recipe = ref({});
+          let recipe = ref({
+            id: uuid.v1(),
+            title: '',
+            imageUrl: '',
+            servings: '',
+            time: '', 
+            difficulty: '',
+            ingredients: [],
+            directions: [],
+            featured: ''
+          });
 
           const createRecipe = async () => {
             var error = document.getElementById("errores");
             var add = document.getElementById("add");
 
             //Valida que los campos no esten vacíos
-            if(title.value == '' || ingredients.value == '' || directions.value == '') {
+            if(recipe.value.title == '' || recipe.value.ingredients == '' || recipe.value.directions == '') {
             //Chivatos de campos vacios
+              console.log(recipe.value.id);
               console.log("Titulo vacio!!");
               console.log("Ingredientes Vacio!!");
               console.log("Indicaciones Vacio!!");
@@ -113,13 +124,13 @@ export default defineComponent({
               add.innerHTML = '';
             } else {
             //Separo ingredientes e indicaciones si tienen un punto                        
-              let ingredienteUnaAuno = ingredients.value;
-              ingredienteUnaAuno = ingredients.value.split('.');
+              let ingredienteUnaAuno = recipe.value.ingredients;
+              ingredienteUnaAuno = recipe.value.ingredients.split('.');
               console.log("Ingredientes Separados: "+ingredienteUnaAuno);
 
-              let directionsUnaAuno = this.directions;
+              let directionsUnaAuno = recipe.value.directions;
               //directionsUnaAuno = this.directions.search('.');
-              directionsUnaAuno = directions.value.split('.');
+              directionsUnaAuno = recipe.value.directions.split('.');
               //directionsUnaAuno = this.directions.split('\n');
 
               console.log("Directions Separados: "+directionsUnaAuno);
@@ -128,38 +139,39 @@ export default defineComponent({
               console.log("Directions Separados: "+directionsUnaAuno);
             */
             //Indico si tiene el featured activado
-              if(featured.value==''){
-                featured.value = false;
+              if(recipe.value.featured==''){
+                recipe.value.featured = false;
               } else {
-                featured.value = true;
+                recipe.value.featured = true;
               }
 
             //Creo el objeto receta para pasar a App 
-                recipe = {
-                    id: id.value, 
-                    title: title.value, 
-                    imageUrl: imageUrl.value, 
-                    servings: servings.value,
-                    time: time.value,
-                    difficulty: difficulty.value,
+                let receta = {
+                    id: recipe.value.id, 
+                    title: recipe.value.title, 
+                    imageUrl: recipe.value.imageUrl, 
+                    servings: recipe.value.servings,
+                    time: recipe.value.time,
+                    difficulty: recipe.value.difficulty,
                     ingredients: ingredienteUnaAuno,
                     directions: directionsUnaAuno,
-                    featured: featured.value,
+                    featured: recipe.value.featured,
                 };
                   try {
-                    let response = await axios.post("http://localhost:3000/recipe/", recipe.value);
-                    console.log("Response: "+response); 
+                    let response = await axios.post("http://localhost:3000/recipe/", receta);
+                    console.log("Dentro de función createRecipe"); 
+                    console.log(response); 
                     //this.recipeList = response.data.recipe;
                   } catch (error){
                     console.log(error);
                     console.log("No funciona el borrado");
                   }
             //Emite la receta nueva a App
-               context.emit('nuevaReceta', recipe.value);
+               emit('nuevaReceta', receta);
             //Cierra la ventana modal
                //this.$emit('cerrarForm', this.showModal=false);
             //Muestra datos de receta por consola
-                console.log("Emitida nueva receta: "+recipe.value);
+                console.log("Emitida nueva receta: "+receta);
             //Pongo el Div de error en blanco
                 error.innerHTML = '';
             //Indico en el Div add que se añade la receta nueva
@@ -168,38 +180,40 @@ export default defineComponent({
 
             //Datos introducidos mostrados por consola
                 console.log("//DATOS INTRODUCIDOS EN FORMULARIO")
-                console.log("Id: "+recipe.value);
-                console.log("Title: "+recipe.value);
-                console.log("imageURL: "+recipe.value);
-                console.log("Servings: "+recipe.value);
-                console.log("Time: "+recipe.value);
-                console.log("Difficulty: "+recipe.value);
-                console.log("Igredients: "+recipe.value);
-                console.log("Directions: "+recipe.value);
-                console.log("Featured: "+recipe.value);
+                // console.log("Id: "+recipe.value.id);
+                // console.log("Title: "+recipe.value.title);
+                // console.log("imageURL: "+recipe.value.imageUrl);
+                // console.log("Servings: "+recipe.value.servings);
+                // console.log("Time: "+recipe.value.time);
+                // console.log("Difficulty: "+recipe.value.difficulty);
+                // console.log("Igredients: "+recipe.value.ingredients);
+                // console.log("Directions: "+recipe.value.directions);
+                // console.log("Featured: "+recipe.value.featured);
 
             //Reinicio los campos
-                id.value = '';
-                title.value = '';
-                imageUrl.value = ''; 
-                servings.value = '';
-                time.value = '';
-                difficulty.value = '';
-                ingredients.value = '';
-                directions.value = '';
-                featured.value = '';
+                // document.getElementById("id") = '';
+                // document.getElementById("title") = '';
+                // recipe.value.id = '';
+                // recipe.value.title = '';
+                // recipe.value.imageUrl = ''; 
+                // recipe.value.servings = '';
+                // recipe.value.time = '';
+                // recipe.value.difficulty= '';
+                // recipe.value.ingredients = '';
+                // recipe.value.directions = '';
+                // recipe.value.featured = '';
 
             }//Fin if/else
       
           }//FIN createRecipe()
 
           const closeForm = () => {
-            context.emit('closeForm', showModal.value = false);
+            emit('closeForm', showModal.value = false);
             //Chivato para ver si emite
             //console.log("Función closeForm(){}: "+ this.showModal);
           }//FIN closeForm()
 
-      return {createRecipe, closeForm}
+      return { createRecipe, closeForm, recipe }
 
 
         },
