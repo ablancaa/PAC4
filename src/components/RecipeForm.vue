@@ -151,7 +151,7 @@ export default defineComponent({
 
           //Pongo el Div de error en blanco
               error.innerHTML = '';
-              
+
           //Indico en el Div add que se añade la receta nueva
               add.innerHTML = 'Add recipe <br/>';
               add.innerHTML += '<br/>';
@@ -166,6 +166,7 @@ export default defineComponent({
               // console.log("Igredients: "+recipe.value.ingredients);
               // console.log("Directions: "+recipe.value.directions);
               // console.log("Featured: "+recipe.value.featured);
+              
           //Reinicio los campos
               // document.getElementById("id").value = ' ';
               // document.getElementById("title").value = ' ';
