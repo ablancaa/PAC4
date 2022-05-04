@@ -3,7 +3,7 @@
     <!-- <p>Consulta: {{ consulta }}</p> -->
     <div>
     <form @submit.prevent="busqueda"> 
-       <input type="text" id="consulta" v-model="consulta" @search="search" placeholder="Search for a recipe" />
+       <input type="text" id="consulta" v-model="consulta" :query="consulta" @search="search" placeholder="Search for a recipe" />
        <button v-if="consulta != ''" @click="clearSearch">Clear Search</button>
     </form>
     </div>
@@ -14,7 +14,7 @@
 </template>
 <script>
 
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref, reactive } from "vue";
 export default defineComponent({
   
   name: "SearchBar",
@@ -28,6 +28,9 @@ export default defineComponent({
   //props: ['consulta'],
   emits: ['openForm', 'clearSearch', 'newVal'],
   setup(props, context){
+    const query = reactive({
+    consulta: '',
+  })
     let showModal = ref(false);
     let consulta = ref('');
     console.log("Setup en SearchBar variable consulta: "+consulta.value)
@@ -59,7 +62,7 @@ export default defineComponent({
           console.log("Contenido de newVal: "+consulta.value);
         }
     }  
-    return { showForm, clearSearch, search, consulta };
+    return { showForm, clearSearch, search, query, consulta };
   },//FIN SETUP()
   computed: {},
   methods: {

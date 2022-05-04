@@ -4,7 +4,7 @@
       <img class="logo" alt="UOC logo" src="./assets/uoc-logo.png" />
       <div class="app-name">Recipe book</div>
     </div>
-    <search-bar @openForm="toggleForm" @newVal="setSearchTerm" @clearSearch="setSearchTerm" />
+    <search-bar @openForm="toggleForm" @newVal="setSearchTerm" @focus="query" @clearSearch="setSearchTerm" />
     <recipe-list :recipeList="recipeListFiltered" @deleteRecipe="deleteRecipe"/>
     <recipe-form v-if="showModal" @closeForm="toggleForm"  @nuevaReceta="addRecipe" @cerrarForm="toggleForm"/>
     
@@ -34,6 +34,11 @@ export default defineComponent({
     filterData: [],  
   }),
   // setup(){
+ // if (this.searchTerm == ''){
+   // this.recipeListFiltered;
+ // }
+ // console.log("setSearchInfo(): "+this.searchTerm);
+ // //this.recipeListFiltered();   
     // let recipeList = ref([]);
     // let showModal = ref('');
     // /*Modifica l'estat del paràmetre showModal al seu invers.*/
@@ -128,7 +133,7 @@ export default defineComponent({
           //Vuelve a solicitar la lista al servidor
           try {
             let response = await axios.get('http://localhost:3000/recipes/');
-            this.recipeList= response.data.recipes;
+            this.recipeList = response.data.recipes;
             console.log("FUNCIÓN: deleteRecipe() en App");
             console.log(response);
           } catch (error) {
@@ -143,7 +148,7 @@ export default defineComponent({
      //Vuelve a solicitar la lista al servidor
        try {
         let response = await axios.get('http://localhost:3000/recipes/');
-        this.recipeList= response.data.recipes;
+        this.recipeList = response.data.recipes;
         console.log("FUNCIÓN: deleteRecipe() en App");
         console.log(response);
         console.log("La receta se ha borrado");
