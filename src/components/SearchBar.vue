@@ -41,13 +41,6 @@ export default defineComponent({
      /*Aquest mètode s'executarà cada vegada que es modifiqui l'element
      input del camp de cerca (cada vegada que es teclegi una lletra). Emetrà un esdeveniment
      'search' amb el contingut del camp de cerca */
-    /*const search = () => {
-      console.log("Letra picada en Search Bar Input");
-        if(consulta.value != ''){
-          context.emit('newVal', consulta.value);
-          console.log("Contenido de newVal: "+consulta.value);
-        }
-    }*/
     const search = ref(consulta);   
     watch(search, (currentValue, oldValue) => {
       console.log(currentValue);
