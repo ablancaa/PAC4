@@ -19,15 +19,10 @@ export default defineComponent({
     }
     },
     components: { Recipe },
-    /*
-    data() {
-        return {
-      }
-    },*/
+
     emits:['deleteRecipe'],
     setup(props, context){
-      //let receta = ref([props.recipeList]);
-      //let idAborrar = ref(props.recipeList);
+
       /* Esdeveniment encarregat d'informar que s'ha eliminat una recepta amb
       identificador id.*/
       /* Esdeveniment encarregat d'informar que s'ha eliminat una recepta.
@@ -41,20 +36,8 @@ export default defineComponent({
       }
 
       return { deleteRecipe }
+      
     },
-    computed: {},
-    methods: {
-    /* Esdeveniment encarregat d'informar que s'ha eliminat una recepta amb
-       identificador id.*/
-    /* Esdeveniment encarregat d'informar que s'ha eliminat una recepta.
-       Aquest esdeveniment es propagarà quan es capturi l'esdeveniment delete-recipe per part
-       del component RecipeCard.vue.*/
-      /*deleteRecipe(info){
-        this.$emit('deleteRecipe', info);
-        console.log("Desde recipeList: "+ info);
-      },*/
-
-    }//FIN METHODS
 
 });//FIN EXPORT DEFAULT
 </script>
