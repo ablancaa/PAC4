@@ -60,7 +60,7 @@ export default defineComponent({
 
       const deleteRecipe = async () => {
       try {
-        let response = await axios.delete("http://localhost:3000/recipe/",{ data: { id: recipeList.value.id } });
+        let response = await axios.delete("http://localhost:3000/recipe",{ data: { id: recipeList.value.id } });
         console.log("FUNCIÓN: deleteRecipe() desde Recipe");
         console.log(response); 
         recipeList.value = response.data.recipe;

@@ -4,7 +4,7 @@
       <img class="logo" alt="UOC logo" src="./assets/uoc-logo.png" />
       <div class="app-name">Recipe book</div>
     </div>
-    <search-bar @openForm="toggleForm" @newVal="setSearchTerm" @focus="query" @clearSearch="setSearchTerm" />
+    <search-bar @openForm="toggleForm" @newVal="setSearchTerm" @clearSearch="setSearchTerm" />
     <recipe-list :recipeList="recipeListFiltered" @deleteRecipe="deleteRecipe"/>
     <recipe-form v-if="showModal" @closeForm="toggleForm"  @nuevaReceta="addRecipe" @cerrarForm="toggleForm"/>
     
@@ -91,7 +91,7 @@ export default defineComponent({
     //Carga el listado de recetas del servidor
     try {
     let response = await axios.get('http://localhost:3000/recipes/');
-    this.recipeList= response.data.recipes;
+    this.recipeList = response.data.recipes;
     console.log(response);
     } catch (error){
       console.log(error);
