@@ -20,6 +20,7 @@ export default defineComponent({
   name: "SearchBar",
   components: {},
   emits: ['openForm', 'clearSearch', 'newVal'],
+  
   setup(props, context){
     let showModal = ref(false);
     let consulta = ref('');
@@ -31,7 +32,7 @@ export default defineComponent({
       context.emit('openForm', showModal.value = true);
       console.log("Emitido de SearchBar: "+showModal.value);
     }
-    
+
      /* Aquest mètode s'encarregarà de buidar l'element input del camp de cerca.
      S’haurà d’executar quan es faci clic al botó “Clear Search”. */
     const clearSearch = () => {

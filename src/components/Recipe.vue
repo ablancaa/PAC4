@@ -53,6 +53,7 @@ export default defineComponent({
     },
   },
   emits: ['deleteRecipe'],
+  
   setup(props, context){
     //let recipe = ref(props.recipe);
     let recipeList = ref(props.recipe);

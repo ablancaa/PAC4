@@ -68,7 +68,9 @@ export default defineComponent({
   name: "RecipeForm",
 
     emits:['nuevaReceta','closeForm'],
+    
     setup(props, context){
+      
       let showModal = ref(false);
       let recipe = ref({
         id: uuid.v1(),

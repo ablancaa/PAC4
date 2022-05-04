@@ -21,6 +21,7 @@ export default defineComponent({
   components: { Recipe },
 
   emits:['deleteRecipe'],
+  
   setup(props, context){
 
     /* Esdeveniment encarregat d'informar que s'ha eliminat una recepta amb
@@ -38,7 +39,7 @@ export default defineComponent({
       return { deleteRecipe }
 
   },//FIN setup()
-  
+
 });//FIN EXPORT DEFAULT
 </script>
 
