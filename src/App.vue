@@ -6,8 +6,7 @@
     </div>
     <search-bar @openForm="toggleForm" @newVal="setSearchTerm" @clearSearch="setSearchTerm" />
     <recipe-list :recipeList="recipeListFiltered" @deleteRecipe="deleteRecipe"/>
-    <recipe-form v-if="showModal" @closeForm="toggleForm"  @nuevaReceta="addRecipe" @cerrarForm="toggleForm"/>
-    
+    <recipe-form v-if="showModal" @closeForm="toggleForm"  @nuevaReceta="addRecipe" @cerrarForm="toggleForm"/> 
   </div>
 </template>
 
@@ -31,7 +30,6 @@ export default defineComponent({
     recipeList: [],
     showModal: false,
     searchTerm:'',
-    filterData: [],  
   }),
   // setup(){
  // if (this.searchTerm == ''){
@@ -121,7 +119,7 @@ export default defineComponent({
   },     
   methods: {
   /* Afegeix un objecte de tipus Recipe a l'array d'elements recipeList. */
-   async addRecipe(recipe){
+    async addRecipe(recipe){
           try {
             let response = await axios.post("http://localhost:3000/recipe/", recipe);
             console.log("Dentro de función createRecipe"); 
@@ -144,7 +142,7 @@ export default defineComponent({
 
   /*Elimina l'objecte de la llista recipeList l'identificador id és el
   passat per paràmetre.*/
-   async deleteRecipe(){
+    async deleteRecipe(){
      //Vuelve a solicitar la lista al servidor
        try {
         let response = await axios.get('http://localhost:3000/recipes/');
@@ -176,9 +174,10 @@ export default defineComponent({
       console.log("setSearchInfo(): "+this.searchTerm);  
       //this.recipeListFiltered();   
     },
-  },
-  watch:{},
-});
+
+  },//FIN methods()
+
+});//FIN export default
 </script>
 
 <style>
