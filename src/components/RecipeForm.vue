@@ -84,17 +84,6 @@ export default defineComponent({
         },*/
         setup(context, {emit}){
           let showModal = ref(false);
-          //let id = ref(uuid.v1());
-          //let title = ref('');
-          //let imageUrl = ref('');
-          //let servings = ref('');
-          //let time = ref('');
-          //let difficulty = ref('');
-          //let ingredients = ref([]);
-          //let directions = ref([]);
-          //let featured = ref('');
-          //let submit = ref('');
-          //let mensajeError = ref('');
           let recipe = ref({
             id: uuid.v1(),
             title: '',
@@ -191,8 +180,8 @@ export default defineComponent({
                 console.log("Featured: "+recipe.value.featured);
 
             //Reinicio los campos
-                // document.getElementById("id") = '';
-                // document.getElementById("title") = '';
+                // document.getElementById("id").value = ' ';
+                // document.getElementById("title").value = ' ';
                 // recipe.value.id = '';
                 // recipe.value.title = '';
                 // recipe.value.imageUrl = ''; 
