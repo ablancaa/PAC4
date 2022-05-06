@@ -75,6 +75,7 @@ let recipesList = [
     directions: ["lavar arroz", "cut ajo", "cut patatoes"],
     imageUrl:
       "https://www.petitchef.es/imgupl/recipe/arroz-a-la-mexicana-un-arroz-blanco-con-algo-mas--453320p702271.jpg",
+    featured: true,
   },
 ];
 
