@@ -92,6 +92,8 @@ export default defineComponent({
     async deleteRecipe(){
      //Vuelve a solicitar la lista al servidor
        try {
+    
+      //let response = await axios.delete("http://localhost:3000/recipe",recipeId);
         let response = await axios.get('http://localhost:3000/recipes/');
         this.recipeList = response.data.recipes;
         console.log("FUNCIÓN: deleteRecipe() en App");
