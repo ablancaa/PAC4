@@ -63,12 +63,12 @@ export default defineComponent({
           ○ delete-recipe(id): Esdeveniment encarregat d'informar que s'ha eliminat 
           una recepta. Indica l'identificador id de la recepta com a paràmetre.*/
       const deleteRecipe = async () => {
-      try {
-        let response = await axios.delete("http://localhost:3000/recipe",{ data: { id: recipeList.value.id } });
-        console.log("FUNCIÓN: deleteRecipe() desde Recipe");
-        console.log(response); 
-        recipeList.value = response.data.recipe;
-        context.emit("deleteRecipe", receta.value.id);
+        try {
+          let response = await axios.delete("http://localhost:3000/recipe",{ data: { id: recipeList.value.id } });
+          console.log("FUNCIÓN: deleteRecipe() desde Recipe");
+          console.log(response); 
+          recipeList.value = response.data.recipe;
+          context.emit("deleteRecipe", receta.value.id);
         } catch (error){
           console.log(error);
           console.log("No funciona el borrado");
