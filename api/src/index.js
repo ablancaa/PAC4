@@ -102,7 +102,7 @@ let recipesList = [
     featured: false,
   },
   {
-    id: "a9999c99-c999-99ec-999b-9d9999a999b9",
+    id: "a0000c00-c000-00ec-000b-0d0000a000b0",
     servings: 4,
     time: "1h",
     difficulty: "Medium",
