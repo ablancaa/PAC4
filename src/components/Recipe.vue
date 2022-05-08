@@ -56,8 +56,7 @@ export default defineComponent({
   
   setup(props, context){
     //let recipe = ref(props.recipe);
-    let recipeList = ref(props.recipe);
-    //let receta = ref([]);
+    let receta = ref(props.recipe);
     /* Aquest mètode s'ha d'executar cada vegada que es fes clic al botó amb la X. 
        Haureu d'emetre els esdeveniments següents: 
           ○ delete-recipe(id): Esdeveniment encarregat d'informar que s'ha eliminat 
@@ -69,7 +68,7 @@ export default defineComponent({
           let response = await axios.delete("http://localhost:3000/recipe",{ data: { id: recipeList.value.id } });
           console.log("FUNCIÓN: deleteRecipe() desde Recipe");
           console.log(response); 
-          recipeList.value = response.data.recipe;
+          recipeList.value = response.data.receta;
           context.emit("deleteRecipe", receta.value.id);
         } catch (error){
           console.log(error);
@@ -79,9 +78,9 @@ export default defineComponent({
 
       const deleteRecipe = () => {
 
-         console.log("FUNCIÓN: deleteRecipe() desde Recipe emite => "+recipeList.value.id);
-         context.emit("deleteRecipe", recipeList.value.id);
-         
+         console.log("FUNCIÓN: deleteRecipe() desde Recipe emite => "+receta.value.id);
+         context.emit("deleteRecipe", receta.value.id);
+
       }//FIN deleteRecipe()
 
     return  { deleteRecipe };

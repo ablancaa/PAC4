@@ -6,7 +6,7 @@
     </div>
     <search-bar @openForm="toggleForm" @newVal="setSearchTerm" @clearSearch="setSearchTerm" />
     <recipe-list :recipeList="recipeListFiltered" @deleteRecipe="deleteRecipe"/>
-    <recipe-form v-if="showModal" @closeForm="toggleForm"  @nuevaReceta="addRecipe" @cerrarForm="toggleForm"/> 
+    <recipe-form v-if="showModal" @closeForm="toggleForm" @nuevaReceta="addRecipe" @cerrarForm="toggleForm"/> 
   </div>
 </template>
 

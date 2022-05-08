@@ -22,15 +22,16 @@ export default defineComponent({
 
   emits:['deleteRecipe'],
   
-  setup(props, { emit }){
+  setup(props, context){
 
     /* Esdeveniment encarregat d'informar que s'ha eliminat una recepta amb
        identificador id.*/
-       /* Esdeveniment encarregat d'informar que s'ha eliminat una recepta.
+    /* Esdeveniment encarregat d'informar que s'ha eliminat una recepta.
        Aquest esdeveniment es propagarà quan es capturi l'esdeveniment delete-recipe per part
        del component RecipeCard.vue.*/
+
        const deleteRecipe = (id) => {
-         emit('deleteRecipe', id);
+         context.emit('deleteRecipe', id);
          console.log("FUNCIÓN deleteRecipe() desde recipeList emite => "+id);
        }
 

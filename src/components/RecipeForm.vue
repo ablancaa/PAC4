@@ -94,6 +94,7 @@ export default defineComponent({
               d'ingredients i directions..
             ○ Emetre un esdeveniment add-recipe amb l'objecte creat.
             ○ Esborrar els camps del formulari.  */
+
         const createRecipe = () => {
           var error = document.getElementById("errores");
           var add = document.getElementById("add");
@@ -169,6 +170,7 @@ export default defineComponent({
           }//Fin if/else
     
         }//FIN createRecipe()
+        
       /* Aquest mètode s'ha d'executar quan es faci clic al botó que conté el svg amb
          el símbol X. S'encarregarà de:
           ○ Emetre un esdeveniment close-modal  */

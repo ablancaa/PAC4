@@ -37,25 +37,24 @@ export default defineComponent({
      S’haurà d’executar quan es faci clic al botó “Clear Search”. */
     const clearSearch = () => {
       consulta.value = document.getElementById("consulta").value="";
-      //context.emit('clearSearch', consulta.value);
       console.log("Función clearSearch(){} Campo reseteado");
     }
 
      /*Aquest mètode s'executarà cada vegada que es modifiqui l'element
      input del camp de cerca (cada vegada que es teclegi una lletra). Emetrà un esdeveniment
      'search' amb el contingut del camp de cerca */
-    /*const search = ref(consulta);   
-    watch(search, (currentValue, oldValue) => {
-      console.log("Valor actual en la SearchBar: "+currentValue);
-      console.log("Valor pasado en la SearchBar: "+oldValue);
-      context.emit("newVal", search);
-    });*/
 
     const search = ref(consulta);   
     watch(search, (currentValue) => {
       console.log("Valor actual en la SearchBar: "+currentValue);
       context.emit("newVal", search);
     });
+    /*const search = ref(consulta);   
+      watch(search, (currentValue, oldValue) => {
+        console.log("Valor actual en la SearchBar: "+currentValue);
+        console.log("Valor pasado en la SearchBar: "+oldValue);
+        context.emit("newVal", search);
+      });*/
   
     return { showForm, clearSearch, consulta, watch, search };
 
