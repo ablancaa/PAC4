@@ -56,7 +56,7 @@ export default defineComponent({
         context.emit("newVal", search);
       });*/
   
-    return { showForm, clearSearch, consulta, watch, search };
+    return { consulta, showForm, clearSearch, watch };
 
   },//FIN Setup()
 

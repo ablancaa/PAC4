@@ -15,7 +15,7 @@ import RecipeList from "./components/RecipeList.vue";
 import RecipeForm from "./components/RecipeForm.vue";
 import SearchBar from "./components/SearchBar.vue";
 import axios from "axios";
-//import CompositionApi from '@vue/composition-api';
+
 import { defineComponent } from "vue";
 
 export default defineComponent({
