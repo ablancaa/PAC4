@@ -1,5 +1,8 @@
 # pac4
 
+## Arranque de servidor de API
+npm run api
+
 ## Project setup
 ```
 npm install
