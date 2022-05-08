@@ -77,6 +77,43 @@ let recipesList = [
       "https://www.petitchef.es/imgupl/recipe/arroz-a-la-mexicana-un-arroz-blanco-con-algo-mas--453320p702271.jpg",
     featured: true,
   },
+  {
+    id: "a8888c88-c888-88ec-888b-8d8888a888b8",
+    servings: 4,
+    time: "1,5h",
+    difficulty: "Medium",
+    title: "Berenjenas",
+    ingredients: ["Berenjenas", "Cebolla", "Queso"],
+    directions: ["lavar berenjenas", "cortar cebolla", "Rayar queso"],
+    imageUrl:
+      "https://www.cocinacaserayfacil.net/wp-content/uploads/2018/03/Berenjenas-rellenas-de-carne-al-horno.jpg",
+    featured: true,
+  },
+  {
+    id: "a9999c99-c999-99ec-999b-9d9999a999b9",
+    servings: 4,
+    time: "1h",
+    difficulty: "Medium",
+    title: "Mejillones",
+    ingredients: ["Mejillones", "Cebolla", "Tomate"],
+    directions: ["lavar mejillones", "cortar cebolla", "Rayar tomate"],
+    imageUrl:
+      "https://s1.eestatic.com/2019/06/19/cocinillas/recetas/pescado-y-marisco/pescado_y_marisco_407471762_125966896_854x640.jpg",
+    featured: false,
+  },
+  {
+    id: "a9999c99-c999-99ec-999b-9d9999a999b9",
+    servings: 4,
+    time: "1h",
+    difficulty: "Medium",
+    title: "Edamame",
+    ingredients: ["Edamame", "Cebolla", "Tomate"],
+    directions: ["Cocer edamame", "cortar cebolla", "Rayar tomate"],
+    imageUrl:
+      "https://imagenes.20minutos.es/files/image_656_370/uploads/imagenes/2019/05/10/947701.jpg",
+    featured: false,
+  },
+
 ];
 
 let recipe = {
