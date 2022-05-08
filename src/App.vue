@@ -85,6 +85,7 @@ export default defineComponent({
               console.log(error);
               console.log("La lista no puede aparacer");
           }
+          console.log("Receta Añadida");
     },
 
   /*Elimina l'objecte de la llista recipeList l'identificador id és el
