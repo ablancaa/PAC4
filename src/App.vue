@@ -92,13 +92,14 @@ export default defineComponent({
     async deleteRecipe(id){
       try {
         let response = await axios.delete("http://localhost:3000/recipe",{ data: { id } });
-        this.recipeList = response.data.recipes;
+        //this.recipeList = response.data.recipe;
+        console.log(response);
         console.log("ID de la receta a borrar: "+id);
-        console.log("La receta se ha borrado");
         } catch (error){
           console.log(error);
         }
-        
+          
+
       //Vuelve a pedir listado a servidor
       try {
         let response = await axios.get('http://localhost:3000/recipes/');
@@ -106,6 +107,7 @@ export default defineComponent({
         } catch (error){
           console.log(error);
         }
+        console.log("La receta se ha borrado"); 
     },
 
   /*Modifica l'estat del paràmetre showModal al seu invers.*/
@@ -124,7 +126,7 @@ export default defineComponent({
       if (this.searchTerm == ''){
         this.recipeListFiltered;
       }
-      console.log("setSearchInfo(): "+this.searchTerm);  
+      console.log("setSearchInfo() en App: "+this.searchTerm);  
       //this.recipeListFiltered();   
     },
 

@@ -43,7 +43,7 @@
 
 <script>
 import { defineComponent, ref } from "vue";
-import axios from "axios";
+//import axios from "axios";
 export default defineComponent({
   name: "RecipeCard",
   props: {
@@ -77,17 +77,11 @@ export default defineComponent({
         }
       }////FIN deleteRecipe()*/                                                          
 
-      const deleteRecipe = async () => {
-        try {
-          let response = await axios.get("http://localhost:3000/recipe", { data: { id: recipeList.value.id } });
-          console.log("FUNCIÓN: deleteRecipe() desde Recipe => axios");
-          console.log(response); 
-          console.log("FUNCIÓN: deleteRecipe() desde Recipe emite => "+recipeList.value.id);
-          context.emit("deleteRecipe", recipeList.value.id);
-        } catch (error){
-          console.log(error);
-          console.log("No funciona el borrado recipe");
-        }
+      const deleteRecipe = () => {
+
+         console.log("FUNCIÓN: deleteRecipe() desde Recipe emite => "+recipeList.value.id);
+         context.emit("deleteRecipe", recipeList.value.id);
+         
       }//FIN deleteRecipe()
 
     return  { deleteRecipe };
