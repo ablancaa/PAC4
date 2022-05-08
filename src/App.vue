@@ -89,16 +89,20 @@ export default defineComponent({
 
   /*Elimina l'objecte de la llista recipeList l'identificador id és el
   passat per paràmetre.*/
-    async deleteRecipe(){
-     //Vuelve a solicitar la lista al servidor
-       try {
-    
-      //let response = await axios.delete("http://localhost:3000/recipe",recipeId);
+    async deleteRecipe(id){
+      try {
+        let response = await axios.delete("http://localhost:3000/recipe",{ data: { id } });
+        this.recipeList = response.data.recipes;
+        console.log("ID de la receta a borrar: "+id);
+        console.log("La receta se ha borrado");
+        } catch (error){
+          console.log(error);
+        }
+        
+      //Vuelve a pedir listado a servidor
+      try {
         let response = await axios.get('http://localhost:3000/recipes/');
         this.recipeList = response.data.recipes;
-        console.log("FUNCIÓN: deleteRecipe() en App");
-        console.log(response);
-        console.log("La receta se ha borrado");
         } catch (error){
           console.log(error);
         }
