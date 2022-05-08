@@ -99,7 +99,6 @@ export default defineComponent({
           console.log(error);
         }
           
-
       //Vuelve a pedir listado a servidor
       try {
         let response = await axios.get('http://localhost:3000/recipes/');
@@ -126,8 +125,7 @@ export default defineComponent({
       if (this.searchTerm == ''){
         this.recipeListFiltered;
       }
-      console.log("setSearchInfo() en App: "+this.searchTerm);  
-      //this.recipeListFiltered();   
+      console.log("setSearchInfo() en App: "+this.searchTerm);     
     },
 
   },//FIN methods()
