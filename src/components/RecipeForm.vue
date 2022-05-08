@@ -65,9 +65,9 @@ import { defineComponent, ref } from "vue";
 import { uuid } from 'vue-uuid';
 //import axios from "axios";
 export default defineComponent({
+  
   name: "RecipeForm",
-
-    emits:['nuevaReceta','closeForm'],
+  emits:['nuevaReceta','closeForm'],
     
     setup(props, context){
       
@@ -170,7 +170,7 @@ export default defineComponent({
           }//Fin if/else
     
         }//FIN createRecipe()
-        
+
       /* Aquest mètode s'ha d'executar quan es faci clic al botó que conté el svg amb
          el símbol X. S'encarregarà de:
           ○ Emetre un esdeveniment close-modal  */

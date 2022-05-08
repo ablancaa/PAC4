@@ -19,7 +19,6 @@ export default defineComponent({
     }
   },
   components: { Recipe },
-
   emits:['deleteRecipe'],
   
   setup(props, context){
