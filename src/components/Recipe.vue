@@ -54,7 +54,7 @@ export default defineComponent({
   },
   emits: ['deleteRecipe'],
   
-  setup(props, context){
+  setup(props,context){
     //let recipe = ref(props.recipe);
     let receta = ref(props.recipe);
     /* Aquest mètode s'ha d'executar cada vegada que es fes clic al botó amb la X. 
