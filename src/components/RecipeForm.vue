@@ -5,10 +5,10 @@
       <div class="recipe-form-header">
         <h2>Add a new recipe</h2>
         <div id="errores">
-            <p>{{ mensajeError }}</p>
+            <p>{{  }}</p>
         </div>
         <div id="add">
-            <p>{{ mensajeError }}</p>
+            <p>{{  }}</p>
         </div>
         <button @click="closeForm">
           <img src="../assets/close-button.svg" alt="Close modal" />
@@ -70,7 +70,7 @@ export default defineComponent({
   emits:['nuevaReceta','closeForm'],
     
     setup(props, context){
-      
+      let mensajeError = ref('The fields Title, Ingredients and Directions are required <br/>');
       let showModal = ref(false);
       let recipe = ref({
         id: uuid.v1(),
@@ -106,7 +106,8 @@ export default defineComponent({
             console.log("Ingredientes Vacio!!");
             console.log("Indicaciones Vacio!!");
           //Pinta en pantalla el error
-            error.innerHTML = 'The fields Title, Ingredients and Directions are required <br/>';
+           // error.innerHTML = 'The fields Title, Ingredients and Directions are required <br/>';
+            error.innerHTML = mensajeError.value;
             error.innerHTML += '<br/>';
             add.innerHTML = '';
           } else {
@@ -154,7 +155,23 @@ export default defineComponent({
           //Indico en el Div add que se añade la receta nueva
               add.innerHTML = 'Add recipe <br/>';
               add.innerHTML += '<br/>';
-
+            borrarCampos();
+          //Reinicio los campos
+              // recipe = ref({
+                // id: recipe.value.id='', 
+                // title: recipe.value.title='', 
+                // imageUrl: recipe.value.imageUrl='', 
+                // servings: recipe.value.servings='',
+                // time: recipe.value.time='',
+                // difficulty: recipe.value.difficulty='',
+                // ingredients: recipe.value.ingredients=[],
+                // directions: recipe.value.directions=[],
+                // featured: recipe.value.featured='',
+              // });
+          }//Fin if/else
+    
+        }//FIN createRecipe()
+        const borrarCampos = () => {
           //Reinicio los campos
               recipe = ref({
                 id: recipe.value.id='', 
@@ -167,10 +184,7 @@ export default defineComponent({
                 directions: recipe.value.directions=[],
                 featured: recipe.value.featured='',
               });
-          }//Fin if/else
-    
-        }//FIN createRecipe()
-
+                }
       /* Aquest mètode s'ha d'executar quan es faci clic al botó que conté el svg amb
          el símbol X. S'encarregarà de:
           ○ Emetre un esdeveniment close-modal  */
@@ -178,7 +192,7 @@ export default defineComponent({
           context.emit('closeForm', showModal.value = false);
         }//FIN closeForm()
 
-      return { createRecipe, closeForm, recipe }
+      return { createRecipe, closeForm, borrarCampos, recipe }
       },
 });
 </script>
