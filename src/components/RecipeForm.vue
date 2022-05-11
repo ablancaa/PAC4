@@ -155,7 +155,7 @@ export default defineComponent({
           //Indico en el Div add que se añade la receta nueva
               add.innerHTML = 'Add recipe <br/>';
               add.innerHTML += '<br/>';
-            borrarCampos();
+              borrarCampos();
           //Reinicio los campos
               // recipe = ref({
                 // id: recipe.value.id='', 
@@ -184,7 +184,7 @@ export default defineComponent({
                 directions: recipe.value.directions=[],
                 featured: recipe.value.featured='',
               });
-                }
+        }
       /* Aquest mètode s'ha d'executar quan es faci clic al botó que conté el svg amb
          el símbol X. S'encarregarà de:
           ○ Emetre un esdeveniment close-modal  */
